@@ -1,0 +1,13 @@
+CHRONOCARDS - installer le jeu comme une appli
+
+HEBERGEMENT GRATUIT ET PERMANENT (GitHub Pages) :
+1. Cree un compte gratuit sur github.com.
+2. New repository > nom : chronocards > Public > Create.
+3. Add file > Upload files : glisse les FICHIERS de ce dossier (pas le zip), puis Commit.
+4. Settings > Pages > Source : Deploy from a branch > main / root > Save.
+5. Apres 1 minute ton lien est : https://TONPSEUDO.github.io/chronocards/
+
+INSTALLER L APPLI (toi et tes potes) :
+- Android : ouvre le lien dans Chrome > menu > Installer l application.
+- iPhone : ouvre le lien dans Safari > Partager > Sur l ecran d accueil.
+Elle s ouvre ensuite en plein ecran avec son icone, et marche meme sans internet.

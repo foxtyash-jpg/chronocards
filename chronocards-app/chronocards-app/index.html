@@ -1,0 +1,1115 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>CHRONOCARDS</title><meta name="description" content="Réponds aux questions, débloque les cartes et remplis ton musée : animaux, histoire et monuments."><meta name="theme-color" content="#f5f6fa"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🃏</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet"><style>
+:root{color-scheme:light;--bg:#f5f6fa;--card:#fff;--ink:#0f172a;--mut:#64748b;--ln:#e5e7ef;--acc:#4f46e5;--ok:#16a34a;--ko:#dc2626;--r0:#94a3b8;--r1:#16a34a;--r2:#2563eb;--r3:#7c3aed;--r4:#d97706;--r5:#db2777;--sh:0 1px 2px #0f172a0d,0 8px 24px #0f172a0f}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'Plus Jakarta Sans',Inter,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;padding:env(safe-area-inset-top,0px) 0 100px;-webkit-font-smoothing:antialiased}
+header{display:flex;justify-content:space-between;align-items:center;max-width:1040px;margin:auto;padding:16px 20px 0}
+.brand{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:800;letter-spacing:-.3px}.brand span{color:var(--acc)}
+.lg{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#4f46e5,#7c3aed);display:grid;place-items:center;color:#fff;font-weight:800;font-size:16px;box-shadow:0 6px 14px #4f46e544}
+.pills{display:flex;gap:8px}.pill{background:#fff;border:1px solid var(--ln);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:700;box-shadow:var(--sh)}
+main{max-width:1040px;margin:auto;padding:18px 20px}
+h1{font-size:30px;letter-spacing:-.8px;margin-bottom:4px}h2{font-size:22px;letter-spacing:-.4px}h3{font-size:18px;letter-spacing:-.2px}
+.mu{color:var(--mut);font-size:14px;line-height:1.55;margin:4px 0 14px}
+.sec{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin:26px 0 12px}
+.gl{background:var(--card);border:1px solid var(--ln);border-radius:20px;padding:20px;box-shadow:var(--sh)}
+.btn{border:0;border-radius:12px;padding:11px 18px;font-weight:700;font-size:14px;font-family:inherit;color:#fff;background:var(--acc);cursor:pointer;margin:4px 8px 4px 0;box-shadow:0 6px 16px #4f46e533;transition:.15s}.btn:hover{transform:translateY(-1px);filter:brightness(1.06)}
+.btn.s{background:#fff;color:var(--ink);box-shadow:none;border:1px solid var(--ln)}.btn.w{background:#fff;color:var(--acc);box-shadow:0 6px 18px #0002}.btn.d{background:#fff;color:var(--ko);border:1px solid #fecaca;box-shadow:none}
+.hero{display:flex;gap:24px;align-items:center;flex-wrap:wrap;margin:14px 0 6px;padding:26px;border-radius:24px;color:#fff;background:linear-gradient(135deg,#4338ca,#7c3aed 62%,#c026d3);box-shadow:0 20px 44px #4f46e545}
+.hero .mu{color:#e0e7ff}.hero small{font-size:11px;font-weight:800;letter-spacing:.12em;color:#c7d2fe}
+.ring{--p:0;width:108px;height:108px;border-radius:50%;background:conic-gradient(#fff calc(var(--p)*1%),#ffffff33 0);display:grid;place-items:center;flex-shrink:0}.ring b{width:86px;height:86px;border-radius:50%;background:#5b3fd9;display:grid;place-items:center;font-size:22px}
+.wing{display:flex;gap:16px;align-items:center;margin-bottom:14px}
+.wi{font-size:38px;width:72px;height:72px;border-radius:18px;background:hsl(var(--h) 80% 94%);display:grid;place-items:center;flex-shrink:0}
+.bar{height:8px;border-radius:5px;background:#eceff6;overflow:hidden;margin:8px 0 12px}.bar i{display:block;height:100%;background:var(--acc);border-radius:5px;transition:width .4s}.wing .bar i{background:hsl(var(--h) 65% 45%)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.chip,select{background:#fff;border:1px solid var(--ln);color:var(--ink);border-radius:999px;padding:8px 14px;font-size:13px;font-weight:600;font-family:inherit;cursor:pointer;transition:.15s}.chip:hover{border-color:var(--acc)}.chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}.chip b{color:var(--acc);margin-left:6px}.chip.on b{color:#fff}
+nav{position:fixed;bottom:calc(12px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);width:min(420px,calc(100% - 24px));display:flex;gap:4px;padding:6px;border-radius:22px;background:#fffffff2;border:1px solid var(--ln);box-shadow:0 10px 30px #0f172a22;backdrop-filter:blur(14px);z-index:10}
+nav button{flex:1;border:0;background:0;color:var(--mut);font-size:11px;font-weight:700;font-family:inherit;padding:8px 0;border-radius:16px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px}nav svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}nav .on{background:#eef0ff;color:var(--acc)}
+@media(min-width:800px){nav{bottom:auto;top:14px;width:auto;padding:5px}nav button{flex-direction:row;padding:8px 16px;font-size:13px;gap:7px}nav svg{width:18px;height:18px}body{padding-bottom:40px}}
+.gr{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px}.gr.sm{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}
+.cd{background:#fff;border:1px solid var(--ln);border-radius:16px;overflow:hidden;box-shadow:var(--sh);transition:.2s;animation:pop .4s both;text-align:left}
+.cd[onclick]{cursor:pointer}.cd[onclick]:hover{transform:translateY(-4px);box-shadow:0 14px 32px #0f172a1f}
+.ar{position:relative;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;font-size:52px;background:linear-gradient(135deg,hsl(var(--h) 80% 94%),hsl(var(--h) 70% 86%));background-size:cover;background-position:center}.ar.pi{font-size:0}
+.rb{position:absolute;left:8px;top:8px;background:#fffffff2;border-radius:999px;padding:3px 9px 3px 7px;font-size:11px;font-weight:700;color:var(--rc);display:flex;gap:5px;align-items:center;box-shadow:0 2px 6px #0002}.rb::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--rc)}
+.in{padding:10px 12px 12px}.in b{display:block;font-size:14px;line-height:1.25}.in small{color:var(--mut);font-size:12px}
+.lk{box-shadow:none;background:#f1f3f9}.lk .ar{background:#e6e9f2;color:#b3bace;font-size:38px}.lk b{color:#b3bace}
+@keyframes pop{from{opacity:0;transform:translateY(8px)}}
+.ov{position:fixed;inset:0;z-index:30;background:#0f172a73;backdrop-filter:blur(6px);overflow:auto;display:flex;justify-content:center;align-items:flex-start;padding:16px}.ov.q{background:var(--bg);backdrop-filter:none}
+.qw{width:min(580px,100%);text-align:center;position:relative;padding:48px 0 30px;margin:auto}
+.x{position:absolute;top:0;right:0;border:1px solid var(--ln);background:#fff;color:var(--ink);width:38px;height:38px;border-radius:50%;font-size:15px;cursor:pointer;box-shadow:var(--sh)}
+.top{display:flex;justify-content:space-between;font-weight:700;font-size:13px;color:var(--mut);margin-bottom:2px;padding-right:48px}
+.cnt{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);font-weight:800;margin:12px 0}
+.qt{font-size:25px;line-height:1.3;letter-spacing:-.4px;margin:6px 0 22px}
+.opts{display:grid;gap:10px}.opt{padding:15px 16px;border-radius:14px;border:1.5px solid var(--ln);background:#fff;color:var(--ink);font-size:16px;font-weight:600;font-family:inherit;cursor:pointer;transition:.15s;box-shadow:var(--sh)}.opt:hover:not(:disabled){border-color:var(--acc);transform:translateY(-1px)}.opt.ok{background:#dcfce7;border-color:var(--ok)}.opt.ko{background:#fee2e2;border-color:var(--ko)}.opt.dim{opacity:.4}
+.rv{margin-top:22px;display:flex;flex-direction:column;align-items:center;gap:8px}.rv .cd{width:min(250px,72vw)}.ok-t{color:var(--ok);font-weight:800}
+.iv{display:flex;gap:22px;align-items:center;flex-wrap:wrap;max-width:560px;margin:auto}.iv .cd{width:220px;flex-shrink:0}
+.st{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px}.st b{display:block;font-size:24px;letter-spacing:-.5px}.st span{color:var(--mut);font-size:12px}
+#ts{position:fixed;left:50%;bottom:104px;transform:translate(-50%,20px);background:var(--ink);color:#fff;padding:10px 18px;border-radius:12px;opacity:0;transition:.3s;z-index:50;pointer-events:none;font-size:14px}#ts.on{opacity:1;transform:translate(-50%,0)}
+a{color:var(--acc)}
+html{overscroll-behavior:none}body{padding-top:0;user-select:none;-webkit-user-select:none}
+header{position:sticky;top:0;z-index:12;max-width:none;padding:calc(env(safe-area-inset-top,0px) + 14px) max(20px,calc((100% - 1000px)/2)) 12px;background:#f5f6faee;backdrop-filter:blur(12px)}
+.view{animation:vin .35s both}@keyframes vin{from{opacity:0;transform:translateY(10px)}}
+#sp{position:fixed;inset:0;z-index:99;background:linear-gradient(135deg,#4338ca,#7c3aed 62%,#c026d3);display:grid;place-items:center;transition:opacity .5s}#sp .lg{width:84px;height:84px;font-size:40px;border-radius:26px;background:#ffffff30;animation:bn 1s ease-in-out infinite alternate}@keyframes bn{to{transform:scale(1.12)}}
+.cd.f .ar::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 30%,#ffffffaa 48%,transparent 66%);background-size:250% 100%;animation:sh 3.2s infinite}@keyframes sh{from{background-position:150% 0}to{background-position:-100% 0}}
+.tm{height:6px;background:#e6e9f2;border-radius:4px;overflow:hidden;margin:10px 0 2px}.tm i{display:block;height:100%;transform-origin:left;animation:tm 15s linear forwards}@keyframes tm{0%{transform:scaleX(1);background:#22c55e}60%{background:#facc15}100%{transform:scaleX(0);background:#ef4444}}
+.rv .cd{animation:flip .7s both}@keyframes flip{from{transform:rotateY(90deg) scale(.7);opacity:0}}
+.opt.ko{animation:sk .35s}@keyframes sk{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.cf{position:fixed;top:-14px;width:8px;height:13px;border-radius:2px;z-index:70;pointer-events:none;animation:cf 1.4s cubic-bezier(.2,.7,.4,1) forwards}@keyframes cf{to{transform:translate(var(--x),105vh) rotate(var(--r))}}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}.tiles .gl{padding:14px 8px;text-align:center}.tiles b{display:block;font-size:20px;letter-spacing:-.4px}.tiles span{font-size:11px;color:var(--mut);font-weight:600}
+</style></head><body><header id="hd"></header><main id="app"></main><nav id="nv"></nav><div id="sp"><div class="lg">C</div></div><div id="ts"></div>
+<script>
+setTimeout(()=>{const s=document.getElementById("sp");if(s){s.style.opacity=0;setTimeout(()=>s.remove(),500)}},800);
+const H=[["Mammifères", 0], ["Oiseaux", 0], ["Reptiles", 0], ["Poissons", 0], ["Insectes", 0], ["Animaux préhistoriques", 0], ["Animaux disparus", 0], ["Vie marine", 0], ["Arachnides", 0], ["Amphibiens", 0], ["Antiquité", 1], ["Égypte antique", 1], ["Empire romain", 1], ["Moyen Âge", 1], ["Grandes découvertes", 1], ["Révolution française", 1], ["Première Guerre mondiale", 1], ["Seconde Guerre mondiale", 1], ["Époque contemporaine", 1], ["Grandes inventions", 1], ["Europe", 2], ["Asie", 2], ["Afrique et Moyen-Orient", 2], ["Amériques", 2], ["Océanie et records", 2]],W=[['Animaux','🐾',160],['Histoire','🏛️',30],['Monuments','🗼',265]],RA=['Commune','Peu commune','Rare','Épique','Légendaire','Mythique'];
+const CARDS=`🐘|Éléphant d’Afrique|0|2||Plus grand animal terrestre actuel
+🦁|Lion|0|1||Félin social vivant en troupe
+🐺|Loup gris|0|1||Chasse en meute organisée
+🐋|Baleine bleue|0|4||Plus grand animal ayant jamais existé
+🐼|Panda géant|0|2||Mange presque uniquement du bambou
+🐆|Guépard|0|2||Mammifère terrestre le plus rapide
+🦒|Girafe|0|2||Plus haut animal terrestre
+🦘|Kangourou roux|0|1||Plus grand marsupial
+🦇|Chauve-souris|0|1||Seul mammifère capable de voler
+🦓|Zèbre|0|1||Rayures propres à chaque individu
+🦛|Hippopotame|0|2||Grand mammifère des fleuves d’Afrique
+🐻|Ours brun|0|1||Grand omnivore des forêts
+🦊|Renard roux|0|0||Canidé très répandu
+🐬|Grand dauphin|0|2||Mammifère marin très intelligent
+🦥|Paresseux|0|1||Se déplace très lentement
+🦔|Hérisson|0|0||Se roule en boule pour se défendre
+🐫|Dromadaire|0|1||Une bosse, adapté au désert
+🦌|Cerf élaphe|0|1||Le mâle porte des bois renouvelés chaque année
+🐒|Chimpanzé|0|2||Proche cousin de l’humain
+🦙|Lama|0|0||Animal de bât des Andes
+🦫|Castor|0|1||Bâtisseur de barrages
+🐿️|Écureuil roux|0|0||Cache des réserves de noisettes
+🐆|Léopard|0|1||Félin solitaire et grimpeur
+🐅|Jaguar|0|1||Plus grand félin des Amériques
+🐆|Puma|0|1||Félin des montagnes américaines
+🐈|Lynx boréal|0|1||Félin discret aux pinceaux d’oreilles
+🐈|Caracal|0|2||Félin aux oreilles à pinceaux de la savane
+🐈|Serval|0|2||Bondit à plus de 3 m de haut
+🐈|Chat sauvage|0|0||Ancêtre sauvage des chats d’Europe
+🐅|Tigre de Sibérie|0|3||Plus grand félin du monde
+🦁|Lion de l’Atlas|0|2||Lion des montagnes d’Afrique du Nord
+🐆|Once|0|2||Fantôme gris des hauts sommets
+🦊|Fennec|0|2||Renard du désert aux grandes oreilles
+🦊|Renard polaire|0|1||Manteau blanc en hiver
+🦊|Renard arctique|0|0||Survit à −50 °C
+🐺|Loup arctique|0|1||Chasseur du Grand Nord
+🐕|Dingo|0|1||Chien sauvage d’Australie
+🐕|Lycaon|0|1||Chasseur en meute très coordonné
+🐕|Chacal doré|0|0||Charognard et chasseur opportuniste
+🐕|Coyote|0|1||Canidé très adaptable d’Amérique
+🐺|Loup à crinière|0|2||Longues pattes de canidé d’Amérique du Sud
+🦝|Raton laveur|0|1||Lave sa nourriture avec ses mains
+🦡|Blaireau européen|0|0||Creuse de vastes terriers
+🦦|Loutre d’Europe|0|1||Nageuse agile des rivières
+🦨|Mouffette rayée|0|1||Se défend par un jet odorant
+🦡|Ratel|0|3||Réputé le plus téméraire des animaux
+🐾|Fouine|0|0||Petit carnivore nocturne
+🐾|Hermine|0|0||Son pelage devient blanc l’hiver
+🐾|Putois|0|0||Petit mustélidé à masque facial
+🐾|Martre des pins|0|2||Agile acrobate des forêts
+🐾|Glouton|0|3||Robuste carnivore du Grand Nord
+🐾|Belette|0|0||Le plus petit carnivore d’Europe
+🐾|Mangouste|0|1||Rivale des serpents venimeux
+🐾|Suricate|0|0||Sentinelle debout de la savane
+🐾|Hyène tachetée|0|2||Rire célèbre et mâchoires puissantes
+🐾|Genette|0|0||Félin-civette nocturne
+🐘|Éléphant de forêt|0|2||Plus petit cousin de l’éléphant de savane
+🦏|Rhinocéros noir|0|3||Deux cornes et un caractère vif
+🦏|Rhinocéros indien|0|2||Armure de plis de peau
+🦛|Hippopotame nain|0|2||Discret habitant des forêts d’Afrique de l’Ouest
+🐗|Sanglier|0|1||Fouille le sol des forêts
+🐗|Phacochère|0|1||Défenses recourbées et queue dressée
+🐗|Babiroussa|0|3||Cochon aux défenses qui traversent le museau
+🐖|Pécari à collier|0|0||Vit en hardes dans les Amériques
+🐃|Buffle d’Afrique|0|1||Puissant bovin de la savane
+🐃|Buffle d’eau|0|0||Bovin des rizières asiatiques
+🐂|Bison d’Amérique|0|2||Géant des grandes plaines
+🐂|Bison d’Europe|0|3||Plus grand mammifère terrestre d’Europe
+🐂|Yack|0|1||Bovin des hauts plateaux tibétains
+🐐|Chamois|0|0||Grimpeur des montagnes européennes
+🐐|Bouquetin des Alpes|0|2||Maître des falaises alpines
+🐐|Chèvre de montagne|0|0||Équilibriste des rochers
+🐏|Mouflon|0|0||Mâle aux cornes spiralées
+🐏|Mouflon des Rocheuses|0|2||Béliers aux duels retentissants
+🦌|Chevreuil|0|0||Élégant cervidé des bois
+🦌|Daim|0|1||Robe tachetée en été
+🦌|Cerf de Virginie|0|0||Cervidé le plus répandu d’Amérique
+🦌|Élan|0|1||Plus grand cervidé du monde
+🦌|Renne|0|0||Le seul cervidé dont les deux sexes portent des bois
+🦌|Wapiti|0|1||Grand cerf des forêts d’Amérique
+🦌|Muntjac|0|0||Petit cerf aboyeur d’Asie
+🦌|Cerf de Przewalski|0|2||Cerf élégant d’Asie centrale
+🦌|Caribou|0|1||Grand migrateur de la toundra
+🦒|Okapi|0|2||Cousin forestier de la girafe
+🦓|Âne sauvage d’Afrique|0|2||Ancêtre de l’âne domestique
+🐎|Cheval de Przewalski|0|2||Dernier cheval réellement sauvage
+🐎|Mustang|0|1||Cheval retourné à l’état sauvage
+🐴|Tarpan|0|1||Cheval sauvage d’Europe de l’Est
+🐫|Chameau de Bactriane|0|1||Deux bosses et un épais manteau
+🦙|Alpaga|0|0||Élevé pour sa laine fine
+🦙|Vigogne|0|2||Camélidé à la laine très précieuse
+🦙|Guanaco|0|1||Cousin sauvage du lama
+🦘|Wallaby|0|0||Petit cousin du kangourou
+🦘|Kangourou gris|0|0||Bondit à plus de 50 km/h
+🐨|Koala|0|1||Dort près de 20 heures par jour
+🦘|Wombat|0|1||Produit des crottes en forme de cubes
+🐨|Phalanger volant|0|1||Plane d’arbre en arbre
+🦘|Diable de Tasmanie|0|2||Puissante mâchoire de marsupial
+🦘|Quokka|0|1||Le marsupial qui semble sourire
+🦔|Échidné|0|2||Mammifère qui pond des œufs
+🦆|Ornithorynque|0|4||Bec de canard et pond des œufs
+🐿️|Écureuil volant|0|1||Glisse grâce à une membrane
+🐿️|Marmotte alpine|0|0||Hiberne plusieurs mois
+🐿️|Tamia rayé|0|1||Petit rongeur aux joues gonflables
+🐿️|Chien de prairie|0|0||Vit en villages souterrains
+🐀|Rat surmulot|0|0||Rongeur très adaptable
+🐁|Souris grise|0|0||Petit rongeur domestique
+🐭|Mulot sylvestre|0|0||Petit rongeur des bois
+🐹|Hamster d’Europe|0|2||Rongeur menacé des champs
+🐹|Gerbille|0|0||Rongeur des déserts
+🐹|Lemming|0|1||Petit rongeur de la toundra
+🐹|Campagnol|0|0||Petit rongeur des prairies
+🐹|Cochon d’Inde|0|0||Rongeur d’origine andine
+🐀|Capybara|0|2||Plus grand rongeur du monde
+🐀|Agouti|0|1||Plante des arbres sans le savoir
+🐀|Porc-épic|0|0||Épines défensives
+🐀|Chinchilla|0|2||Fourrure extrêmement dense
+🐇|Lièvre d’Europe|0|0||Coureur des plaines
+🐇|Lapin de garenne|0|0||Creuse des terriers en colonie
+🐇|Lièvre variable|0|0||Blanc l’hiver, brun l’été
+🐇|Pika|0|2||Petit lagomorphe des montagnes
+🦇|Roussette géante|0|1||Immense chauve-souris frugivore
+🦇|Vampire commun|0|2||Se nourrit de sang
+🦇|Grand rhinolophe|0|1||Chauve-souris en fer à cheval
+🐒|Gibbon|0|2||Chante en duo dans la canopée
+🐒|Mandrill|0|3||Visage coloré de singe
+🐒|Babouin|0|0||Vit en groupes sociaux
+🐒|Macaque japonais|0|1||Se baigne dans les sources chaudes
+🐒|Capucin|0|1||Singe d’Amérique du Sud
+🐒|Ouistiti|0|0||Petit singe d’Amérique
+🐒|Singe-araignée|0|2||Queue préhensile très agile
+🐒|Singe hurleur|0|2||Cri audible à des kilomètres
+🐒|Tamarin lion doré|0|2||Singe orange menacé
+🐒|Nasique|0|3||Long nez de singe de Bornéo
+🐒|Lémurien catta|0|1||Queue annelée de Madagascar
+🐒|Aye-aye|0|4||Lémurien étrange de Madagascar
+🐒|Indri|0|2||Plus grand lémurien vivant
+🐒|Tarsier|0|2||Primate aux immenses yeux
+🐒|Loris lent|0|1||Primate nocturne au regard rond
+🦍|Gorille des plaines|0|1||Grand primate d’Afrique centrale
+🦧|Bonobo|0|2||Cousin pacifique du chimpanzé
+🐜|Fourmilier géant|0|2||Langue de 60 cm
+🦥|Tatou à neuf bandes|0|0||Cuirasse articulée
+🐾|Pangolin|0|2||Seul mammifère à écailles
+🐾|Oryctérope|0|3||Mange des fourmis la nuit
+🐻|Ours noir|0|1||Grand omnivore d’Amérique du Nord
+🐻|Grizzly|0|2||Grand ours brun d’Amérique
+🐻|Ours à lunettes|0|2||Seul ours d’Amérique du Sud
+🐻|Ours malais|0|2||Plus petit des ours
+🐻|Ours lippu|0|3||Mange des termites
+🐻|Ours kermode|0|3||Ours blanc de la forêt de Colombie-Britannique
+🐻|Kodiak|0|2||Plus grand des ours bruns
+🐼|Panda roux|0|3||Petit grimpeur au pelage roux
+🐻|Ours à collier|0|2||Ours des montagnes d’Asie
+🐬|Dauphin commun|0|0||Nage en grands groupes
+🐬|Marsouin commun|0|1||Petit cétacé des côtes
+🐬|Orque|0|2||Superprédateur des mers
+🐋|Rorqual commun|0|2||Deuxième plus grand animal du monde
+🐋|Baleine à bosse|0|2||Chants complexes
+🐋|Narval|0|3||Dent en forme de défense
+🐋|Béluga|0|2||Baleine blanche de l’Arctique
+🐋|Baleine grise|0|2||Longue migration le long du Pacifique
+🦭|Morse|0|2||Longues défenses d’ivoire
+🦭|Éléphant de mer|0|2||Mâle de plus de 3 tonnes
+🦭|Otarie à fourrure|0|1||Phoque marin à oreilles externes
+🦭|Lion de mer de Californie|0|1||Acrobate joueur des côtes
+🦭|Phoque du Groenland|0|2||Jeunes à fourrure blanche
+🦭|Phoque moine de Méditerranée|0|3||Très rare et menacé
+🦭|Dugong|0|3||Cousin du lamantin
+🦭|Lamantin|0|2||Herbivore lent des eaux chaudes
+🦅|Aigle royal|1|2||Rapace aux vues perçantes
+🦉|Chouette hulotte|1|0||Chasseuse nocturne silencieuse
+🐧|Manchot empereur|1|1||Se reproduit pendant l’hiver antarctique
+🦜|Ara rouge|1|1||Perroquet des forêts tropicales
+🦢|Cygne tuberculé|1|0||Oiseau élégant des étangs
+🦚|Paon bleu|1|2||Le mâle déploie une roue de plumes
+🦩|Flamant rose|1|1||Sa couleur vient de son alimentation
+🦅|Condor des Andes|1|3||Un des plus grands oiseaux volants
+🦆|Canard colvert|1|0||Ancêtre de nombreux canards domestiques
+🦜|Perroquet gris du Gabon|1|2||Imite la voix humaine
+🐓|Coq|1|0||Emblème de la France
+🦅|Pygargue à tête blanche|1|2||Emblème des États-Unis
+🕊️|Colibri|1|2||Vole sur place et à reculons
+🦉|Harfang des neiges|1|2||Chouette blanche de l’Arctique
+🐦|Rouge-gorge|1|0||Petit oiseau territorial
+🦅|Faucon pèlerin|1|3||Dépasse 300 km/h en piqué
+🦆|Oie cendrée|1|0||Ancêtre de l’oie domestique
+🦅|Aigle impérial|1|2||Grand rapace des steppes
+🦅|Aigle de Bonelli|1|1||Rapace rare du Midi
+🦅|Aigle pêcheur|1|2||Plonge pour attraper les poissons
+🦅|Balbuzard pêcheur|1|1||Plonge les serres en avant
+🦅|Buse variable|1|0||Rapace commun des campagnes
+🦅|Milan royal|1|1||Queue fourchue caractéristique
+🦅|Vautour fauve|1|2||Plane de longues heures
+🦅|Gypaète barbu|1|2||Casse les os pour les manger
+🦅|Vautour moine|1|3||Un des plus grands rapaces d’Europe
+🦅|Épervier d’Europe|1|1||Chasse en forêt à toute vitesse
+🦅|Faucon crécerelle|1|0||Vole sur place en chassant
+🦅|Faucon gerfaut|1|3||Plus grand faucon du monde
+🦅|Harpie féroce|1|2||Rapace puissant des forêts tropicales
+🦅|Condor royal|1|2||Vautour coloré d’Amérique
+🦅|Secrétaire|1|2||Rapace marcheur d’Afrique
+🦉|Hibou grand-duc|1|1||Plus grand rapace nocturne d’Europe
+🦉|Chouette effraie|1|1||Visage en forme de cœur
+🦉|Chevêche d’Athéna|1|0||Petite chouette diurne
+🦉|Hibou des marais|1|0||Chasse en plein jour dans les prairies
+🦉|Chouette lapone|1|1||Immense chouette boréale
+🐦|Mésange bleue|1|0||Acrobate des jardins
+🐦|Mésange charbonnière|1|0||Plus grande mésange d’Europe
+🐦|Moineau domestique|1|0||Compagnon des villes
+🐦|Pinson des arbres|1|0||Chant joyeux des bois
+🐦|Chardonneret élégant|1|1||Masque rouge et ailes jaunes
+🐦|Bouvreuil pivoine|1|1||Poitrine rose vif
+🐦|Verdier d’Europe|1|0||Visite les mangeoires
+🐦|Sittelle torchepot|1|0||Descend les troncs la tête en bas
+🐦|Grimpereau des jardins|1|0||Escalade les troncs en spirale
+🐦|Troglodyte mignon|1|1||Petit oiseau au chant puissant
+🐦|Merle noir|1|0||Chant mélodieux au crépuscule
+🐦|Grive musicienne|1|0||Casse les escargots sur une pierre
+🐦|Rossignol philomèle|1|1||Chante de nuit
+🐦|Rougequeue noir|1|0||Queue rousse vibrante
+🐦|Hirondelle rustique|1|0||Migre jusqu’en Afrique
+🐦|Martinet noir|1|1||Dort en vol
+🐦|Alouette des champs|1|1||Chante en montant dans le ciel
+🐦|Bergeronnette grise|1|0||Remue la queue en marchant
+🐦|Étourneau sansonnet|1|0||Forme des vols spectaculaires
+🐦|Geai des chênes|1|1||Plante des chênes en cachant des glands
+🐦|Pie bavarde|1|0||Plumage noir et blanc
+🐦|Corneille noire|1|0||Corvidé très intelligent
+🐦|Grand corbeau|1|2||Plus grand passereau du monde
+🐦|Choucas des tours|1|1||Niche dans les clochers
+🐦|Pic vert|1|1||Mange des fourmis au sol
+🐦|Pic épeiche|1|1||Tambourine sur les troncs
+🐦|Huppe fasciée|1|1||Crête en éventail
+🐦|Martin-pêcheur d’Europe|1|1||Éclair bleu des rivières
+🐦|Guêpier d’Europe|1|2||Mange les guêpes en vol
+🐦|Rollier d’Europe|1|1||Plumage bleu turquoise
+🐦|Coucou gris|1|1||Dépose ses œufs dans d’autres nids
+🐦|Engoulevent d’Europe|1|2||Chasseur nocturne mimétique
+🐦|Tourterelle des bois|1|0||Roucoule dans les bois
+🐦|Pigeon ramier|1|0||Plus grand pigeon d’Europe
+🐦|Faisan de Colchide|1|0||Coq aux couleurs vives
+🐦|Perdrix rouge|1|0||Gibier typique du Sud
+🐦|Caille des blés|1|0||Petit oiseau migrateur discret
+🐦|Grand tétras|1|2||Grand oiseau des forêts de montagne
+🐦|Lagopède alpin|1|1||Blanc en hiver
+🦃|Dindon sauvage|1|0||Ancêtre du dindon domestique
+🐓|Poule sultane|1|1||Oiseau aux pattes rouges
+🦆|Canard mandarin|1|2||Mâle aux couleurs flamboyantes
+🦆|Eider à duvet|1|2||Duvet isolant très précieux
+🦆|Harle bièvre|1|0||Plongeur aux becs dentelés
+🦆|Tadorne de Belon|1|0||Canard blanc et roux
+🦢|Cygne noir|1|1||Plumage sombre d’Australie
+🦢|Cygne chanteur|1|1||Voix de trompette
+🦢|Oie à tête barrée|1|2||Vole à plus de 8 000 m
+🦢|Bernache du Canada|1|1||Vols en V réguliers
+🦩|Flamant des Andes|1|3||Rare flamant d’altitude
+🦩|Spatule blanche|1|2||Bec en spatule pour filtrer l’eau
+🦩|Ibis sacré|1|2||Oiseau sacré des Égyptiens
+🦩|Ibis rouge|1|3||Plumage écarlate d’Amérique
+🦩|Héron cendré|1|0||Pêcheur immobile des étangs
+🦩|Aigrette garzette|1|1||Plumage blanc et doigts jaunes
+🦩|Grande aigrette|1|0||Grand échassier blanc
+🦩|Cigogne blanche|1|1||Niche sur les toits
+🦩|Cigogne noire|1|2||Discrète cigogne des forêts
+🦩|Marabout d’Afrique|1|2||Grand charognard à poche gulaire
+🦩|Bec-en-sabot|1|3||Bec en forme de sabot
+🦩|Grue cendrée|1|2||Danse nuptiale impressionnante
+🦩|Grue couronnée|1|2||Aigrette dorée sur la tête
+🦩|Grue du Japon|1|3||Symbole de longévité
+🦩|Outarde canepetière|1|1||Parade de saut en plein ciel
+🦩|Pélican blanc|1|1||Poche à poissons énorme
+🦩|Cormoran huppé|1|1||Plonge pour pêcher
+🦩|Frégate du Pacifique|1|1||Gonfle une poche rouge
+🦩|Fou de Bassan|1|2||Plonge à 100 km/h
+🦅|Albatros hurleur|1|2||Plus grande envergure d’oiseau
+🐧|Manchot royal|1|2||Cousin du manchot empereur
+🐧|Manchot de Magellan|1|0||Niche dans des terriers
+🐧|Manchot papou|1|1||Plus rapide des manchots
+🐧|Manchot Adélie|1|0||Habitant de l’Antarctique
+🐧|Gorfou sauteur|1|2||Aigrettes jaunes sur la tête
+🐦|Macareux moine|1|2||Bec coloré et plumage noir et blanc
+🐦|Guillemot de Troïl|1|2||Niche sur des falaises
+🐦|Pingouin torda|1|2||Cousin du grand pingouin
+🐦|Mouette rieuse|1|0||Capuchon sombre en été
+🐦|Goéland argenté|1|0||Charognard des côtes
+🐦|Sterne arctique|1|2||Migre d’un pôle à l’autre
+🐦|Labbe parasite|1|2||Chasse les autres oiseaux marins
+🐦|Huîtrier pie|1|1||Ouvre les coquillages
+🐦|Bécasse des bois|1|2||Chasse au crépuscule
+🐦|Barge rousse|1|1||Détient le record du plus long vol sans escale
+🐦|Chevalier gambette|1|0||Sentinelle des marais
+🐦|Avocette élégante|1|1||Bec relevé caractéristique
+🦜|Cacatoès blanc|1|1||Crête blanche mobile
+🦜|Perruche ondulée|1|0||Petit perroquet australien
+🦜|Inséparable|1|0||Perruche fidèle à son partenaire
+🦜|Ara hyacinthe|1|2||Plus grand perroquet volant
+🦜|Toucan toco|1|2||Bec orange démesuré
+🦜|Calao rhinocéros|1|3||Casque sur le bec
+🦜|Oiseau de paradis|1|4||Parades extravagantes
+🦜|Quetzal resplendissant|1|4||Longue queue verte irisée
+🦜|Oiseau-lyre|1|4||Imite tous les sons
+🦜|Casoar à casque|1|4||Grand oiseau coureur dangereux
+🦜|Émeu|1|1||Second plus grand oiseau actuel
+🦜|Autruche|1|2||Plus grand oiseau du monde
+🦜|Nandou|1|2||Autruche d’Amérique
+🦜|Kiwi brun|1|2||Oiseau nocturne sans ailes
+🦜|Hoazin huppé|1|2||Oiseau à griffes au stade juvénile
+🦜|Tangara écarlate|1|2||Rouge flamboyant d’Amérique
+🦜|Cardinal rouge|1|0||Huppé écarlate d’Amérique
+🦜|Colibri d’Anna|1|2||Plumage irisé du Pacifique
+🦜|Colibri d’Elena|1|3||Plus petit oiseau du monde
+🐊|Crocodile du Nil|2|1||Grand prédateur d’Afrique
+🐍|Cobra royal|2|2||Plus long serpent venimeux
+🐢|Tortue des Galápagos|2|2||Peut dépasser 100 ans
+🦎|Caméléon|2|0||Change de couleur et d’humeur
+🐉|Dragon de Komodo|2|3||Plus grand lézard du monde
+🐍|Python réticulé|2|1||Un des plus longs serpents
+🐍|Mamba noir|2|2||Serpent venimeux très rapide d’Afrique
+🐍|Anaconda vert|2|2||Un des serpents les plus lourds
+🦎|Iguane vert|2|1||Lézard arboricole d’Amérique
+🐊|Crocodile marin|2|3||Plus grand reptile vivant
+🐍|Vipère aspic|2|1||Serpent venimeux d’Europe
+🦎|Gecko|2|1||Marche sur les murs
+🐊|Alligator d’Amérique|2|2||Cousin trapu du crocodile
+🐊|Caïman noir|2|2||Plus grand prédateur d’Amazonie
+🐊|Gavial du Gange|2|3||Museau long et étroit
+🐊|Crocodile de Cuba|2|1||Prédateur agile des Caraïbes
+🐊|Crocodile à museau étroit|2|2||Prédateur aux dents fines
+🐢|Tortue verte|2|2||Migre sur des milliers de km
+🐢|Tortue imbriquée|2|3||Carapace aux motifs d’écailles
+🐢|Tortue caouanne|2|2||Mâchoires puissantes
+🐢|Tortue de Floride|2|0||Tortue d’eau douce commune
+🐢|Tortue d’Hermann|2|2||Tortue terrestre du Sud de l’Europe
+🐢|Tortue cistude|2|1||Tortue d’eau douce européenne
+🐢|Tortue serpentine|2|1||Mordeuse aux mâchoires puissantes
+🐢|Tortue à cou de serpent|2|1||Cou très long
+🐢|Tortue d’Aldabra|2|2||Géante de l’océan Indien
+🐢|Tortue rayonnée|2|2||Carapace en étoile
+🐢|Tortue étoilée|2|1||Motifs étoilés sur la carapace
+🐢|Tortue-boîte|2|0||Se referme complètement
+🦎|Lézard vert|2|1||Mâle à gorge bleue
+🦎|Lézard des murailles|2|0||Acrobate des vieux murs
+🦎|Orvet fragile|2|0||Lézard sans pattes
+🦎|Basilic à crête|2|3||Court sur l’eau
+🦎|Agame barbu|2|1||Barbe défensive
+🦎|Moloch épineux|2|2||Boit par la peau
+🦎|Dragon d’eau|2|2||Nageur d’Asie du Sud-Est
+🦎|Dragon volant|2|2||Plane entre les arbres
+🦎|Lézard à collerette|2|2||Collerette déployable
+🦎|Monstre de Gila|2|2||Lézard venimeux du désert
+🦎|Varan du Nil|2|1||Grand lézard d’Afrique
+🦎|Varan de Komodo|2|3||Plus grand lézard actuel
+🦎|Iguane marin|2|2||Seul lézard marin
+🦎|Iguane terrestre des Galápagos|2|2||Mange des cactus
+🦎|Caméléon de Parson|2|3||Plus grand caméléon
+🦎|Caméléon pardalis|2|2||Couleurs vives de Madagascar
+🦎|Gecko léopard|2|0||Motifs en taches
+🦎|Tokay|2|1||Cri sonore de gecko
+🦎|Scinque à langue bleue|2|2||Langue bleue défensive
+🐍|Couleuvre à collier|2|0||Serpent inoffensif des mares
+🐍|Couleuvre verte et jaune|2|0||Rapide et agile
+🐍|Coronelle lisse|2|1||Petit serpent discret
+🐍|Vipère péliade|2|0||Serpent venimeux du Nord
+🐍|Crotale diamantin|2|3||Sonnette redoutable
+🐍|Mamba vert|2|2||Serpent arboricole venimeux
+🐍|Serpent à sonnettes|2|1||Queue qui sonne
+🐍|Boa constricteur|2|2||Étrangle ses proies
+🐍|Python royal|2|1||Se roule en boule
+🐍|Python birman|2|2||Géant des marais d’Asie
+🐍|Serpent des blés|2|1||Rayé de rouge et de noir
+🐍|Taïpan du désert|2|4||Serpent le plus venimeux
+🐍|Vipère du Gabon|2|1||Grande vipère aux motifs géométriques
+🐍|Serpent corail|2|2||Anneaux colorés d’alerte
+🐍|Naja cracheur|2|2||Projette son venin
+🐍|Serpent à lunettes|2|2||Cobra des Indes
+🐍|Serpent de mer annelé|2|2||Serpent venimeux marin
+🐍|Serpent volant|2|2||Plane entre les arbres
+🐍|Hoplocéphale|2|1||Serpent d’Australie
+🦈|Grand requin blanc|3|3||Superprédateur des océans
+🐟|Truite|3|0||Poisson d’eau douce vive
+🐠|Poisson-clown|3|0||Vit en symbiose avec l’anémone
+🐡|Poisson-globe|3|1||Se gonfle pour se défendre
+🗡️|Espadon|3|2||Rostre en forme d’épée
+🦈|Requin-baleine|3|2||Plus grand poisson du monde
+🐟|Hippocampe|3|1||Poisson dont le mâle porte les petits
+🐟|Saumon atlantique|3|1||Remonte les rivières pour se reproduire
+🐟|Anguille européenne|3|1||Migre jusqu’à la mer des Sargasses
+🐠|Poisson-lune|3|2||Plus lourd des poissons osseux
+🐟|Cœlacanthe|3|3|redécouvert en 1938|Fossile vivant
+🐟|Piranha|3|1||Poisson d’eau douce à dents tranchantes
+🐟|Brochet|3|1||Prédateur des rivières
+🐟|Thon rouge|3|2||Grand migrateur des océans
+🐟|Carpe commune|3|0||Poisson robuste des étangs
+🐟|Carpe koï|3|0||Poisson ornemental du Japon
+🐟|Poisson rouge|3|0||Plus ancien poisson d’aquarium
+🐟|Tanche|3|0||Poisson des eaux calmes
+🐟|Gardon|3|0||Petit poisson d’eau douce
+🐟|Perche commune|3|0||Rayures sombres sur le flanc
+🐟|Sandre|3|1||Chasse à la tombée de la nuit
+🐟|Silure glane|3|2||Plus grand poisson d’eau douce d’Europe
+🐟|Truite arc-en-ciel|3|1||Bande rose sur le flanc
+🐟|Truite fario|3|0||Poisson tacheté des torrents
+🐟|Omble chevalier|3|1||Poisson des lacs froids
+🐟|Ombre commun|3|1||Grande nageoire dorsale
+🐟|Saumon rouge|3|2||Rouge vif à la reproduction
+🐟|Saumon royal|3|1||Plus grand des saumons
+🐟|Lamproie marine|3|2||Poisson sans mâchoire
+🐟|Épinoche|3|1||Mâle constructeur de nids
+🐟|Loche franche|3|0||Petit poisson de fond
+🐟|Vairon|3|0||Poisson des petits cours d’eau
+🐟|Lotte|3|0||Seul gadidé d’eau douce
+🐟|Barbeau fluviatile|3|1||Fouille le fond des rivières
+🐟|Anguille électrique|3|2||Décharge jusqu’à 860 volts
+🐟|Poisson-chat|3|0||Longues moustaches
+🐟|Tétra néon|3|0||Poisson aux reflets bleu électrique
+🐟|Scalaire|3|0||Poisson d’aquarium élégant
+🐟|Discus|3|2||Roi des aquariums
+🐟|Combattant|3|1||Mâle agressif aux belles nageoires
+🐟|Guppy|3|0||Petit poisson vivipare
+🐟|Poisson-archer|3|2||Crache de l’eau sur les insectes
+🐟|Arapaïma|3|3||Géant d’Amazonie
+🐟|Poisson-pulmoné|3|3||Respire hors de l’eau
+🐟|Poisson-chauve-souris|3|1||Marche au fond de l’eau
+🐟|Poisson-lanterne|3|2||Produit sa lumière
+🐟|Poisson-pêcheur|3|2||Lanterne au bout d’une canne
+🐟|Poisson-vipère|3|2||Dents transparentes
+🐟|Poisson-hache|3|2||Brille dans les abysses
+🐟|Poisson-ogre|3|3||Prédateur des grandes profondeurs
+🐟|Grenadier de roche|3|2||Poisson des abysses
+🐟|Poisson-ange|3|1||Disque coloré des récifs
+🐟|Chirurgien bleu|3|0||Poisson bleu à queue jaune des récifs
+🐟|Poisson-perroquet|3|2||Broute le corail
+🐟|Poisson-papillon|3|1||Disque jaune et noir
+🐟|Poisson-lion|3|2||Épines venimeuses
+🐟|Poisson-pierre|3|2||Le poisson le plus venimeux
+🐟|Poisson-scorpion|3|2||Camouflé et venimeux
+🐟|Poisson-coffre|3|2||Carapace en boîte
+🐟|Baliste|3|1||Mordant et territorial
+🐟|Murène|3|2||Mâchoires doubles
+🐟|Congre|3|1||Grand poisson-serpent des mers
+🐟|Raie manta|3|2||Envergure de 7 m
+🐟|Raie pastenague|3|1||Aiguillon venimeux
+🐟|Raie aigle|3|2||Vol aquatique gracieux
+🐟|Poisson-scie|3|3||Rostre dentelé
+🐟|Requin tigre|3|2||Mangeur de tout
+🐟|Requin bouledogue|3|2||Remonte les fleuves
+🐟|Requin-taureau|3|1||Dos massif
+🐟|Requin-citron|3|1||Peau jaunâtre
+🐟|Requin pèlerin|3|3||Deuxième plus grand poisson
+🐟|Requin du Groenland|3|4||Peut vivre plus de 250 ans
+🐟|Requin-lutin|3|4||Mâchoire protractile étrange
+🐟|Requin-renard|3|2||Queue démesurée
+🐟|Requin mako|3|2||Plus rapide des requins
+🐟|Requin bleu|3|1||Grand migrateur
+🐟|Requin-nourrice|3|0||Dort sur le fond
+🐟|Requin-zèbre|3|1||Rayures de juvénile
+🐟|Requin-chat|3|0||Petit requin côtier
+🐟|Roussette|3|0||Petit requin des côtes
+🐟|Aiguillat commun|3|1||Petit requin à épines
+🐟|Poisson-volant|3|1||Plane au-dessus des vagues
+🐟|Marlin bleu|3|2||Chasseur rapide de haute mer
+🐟|Voilier de l’Atlantique|3|3||Voile dorsale spectaculaire
+🐟|Dorade coryphène|3|2||Couleurs changeantes
+🐟|Barracuda|3|2||Chasseur à dents longues
+🐟|Mérou géant|3|2||Géant des récifs
+🐟|Bar commun|3|0||Chasseur côtier recherché
+🐟|Daurade royale|3|0||Poisson méditerranéen
+🐟|Sardine|3|0||Petit poisson en bancs immenses
+🐟|Hareng|3|0||Banc de millions d’individus
+🐟|Anchois|3|0||Petit poisson argenté
+🐟|Maquereau|3|0||Rayures sur le dos
+🐟|Morue|3|0||Pêche historique de l’Atlantique Nord
+🐟|Flétan|3|1||Poisson plat géant
+🐟|Sole commune|3|1||Poisson plat très fin
+🐟|Turbot|3|1||Poisson plat du fond
+🐟|Raie bouclée|3|0||Raie épineuse
+🐝|Abeille|4|0||Pollinisatrice indispensable
+🦋|Monarque|4|1||Migre sur des milliers de km
+🐜|Fourmi|4|0||Insecte social très organisé
+🪲|Scarabée Goliath|4|2||Parmi les insectes les plus lourds
+🦗|Criquet pèlerin|4|1||Forme d’immenses nuées
+🐞|Coccinelle|4|0||Dévoreuse de pucerons
+🦟|Libellule|4|1||Insecte ancien et chasseur redoutable
+🐛|Chenille processionnaire|4|0||Se déplace en file indienne
+🪰|Mouche domestique|4|0||Insecte présent sur presque toute la planète
+🐝|Bourdon terrestre|4|1||Pollinisateur robuste des climats frais
+🦋|Morpho bleu|4|2||Papillon aux ailes bleu métallique
+🪲|Scarabée sacré|4|2||Vénéré dans l’Égypte antique
+🦗|Grillon champêtre|4|0||Chante en frottant ses ailes
+🪳|Blatte|4|0||Existe depuis plus de 300 millions d’années
+🐜|Fourmi légionnaire|4|2||Colonnes de millions d’individus
+🐝|Frelon asiatique|4|2||Prédateur d’abeilles invasif en Europe
+🦋|Ornithoptère de la reine Alexandra|4|3||Plus grand papillon du monde
+🦟|Moustique tigre|4|1||Peut transmettre la dengue
+🪲|Scarabée Hercule|4|3||Coléoptère à longue corne
+🌿|Phasme-bâton|4|2||Maître du camouflage végétal
+🐜|Termite|4|1||Bâtisseur de termitières géantes
+🪲|Luciole|4|1||Produit sa propre lumière
+🦗|Mante religieuse|4|2||Chasseuse à l’affût
+🦗|Cigale|4|1||Passe des années sous terre avant d’éclore
+🦋|Paon du jour|4|1||Papillon aux ailes à ocelles
+🪲|Cétoine dorée|4|1||Coléoptère vert métallique
+🐝|Abeille noire|4|1||Abeille locale d’Europe
+🐝|Abeille charpentière|4|1||Creuse le bois
+🐝|Guêpe commune|4|0||Queue rayée
+🐝|Guêpe à nid de papier|4|0||Bâtit des nids en papier
+🐝|Bourdon des mousses|4|0||Bâtit son nid dans les mousses
+🐝|Mégachile|4|1||Découpe des feuilles de rosier
+🐝|Osmie rousse|4|0||Pollinisateur précoce
+🐝|Xylocope|4|2||Grande abeille noire bleutée
+🐝|Eumène|4|0||Guêpe maçonne
+🐜|Fourmi rousse des bois|4|0||Bâtit de grands dômes
+🐜|Fourmi noire des jardins|4|0||Élève des pucerons
+🐜|Fourmi de feu|4|2||Piqûre brûlante
+🐜|Fourmi coupe-feuille|4|2||Cultive un champignon
+🐜|Fourmi tisserande|4|1||Tisse ses nids avec de la soie
+🐜|Fourmi pot-de-miel|4|2||Réserves vivantes de nectar
+🐜|Fourmi balle-de-fusil|4|2||Piqûre redoutée des insectes
+🦋|Machaon|4|2||Grand papillon à queues
+🦋|Papillon citron|4|0||Papillon jaune de printemps
+🦋|Vulcain|4|0||Ailes noires, rouges et blanches
+🦋|Belle-dame|4|0||Grand migrateur
+🦋|Petite tortue|4|0||Papillon orange des jardins
+🦋|Flambé|4|2||Papillon à ailes blanches et noires
+🦋|Grand paon de nuit|4|2||Plus grand papillon d’Europe
+🦋|Sphinx tête de mort|4|2||Motif de crâne sur le thorax
+🦋|Sphinx du tilleul|4|1||Papillon de nuit à ailes dentelées
+🦋|Morio|4|1||Ailes sombres bordées de crème
+🦋|Argus bleu|4|0||Petit papillon bleu
+🦋|Apollon|4|2||Papillon de montagne aux ocelles rouges
+🦋|Bombyx du mûrier|4|1||Produit la soie
+🦋|Atlas|4|3||Plus grande envergure de papillon de nuit
+🦋|Papillon hibou|4|1||Grands ocelles d’alerte
+🦋|Papillon feuille morte|4|1||Imite une feuille sèche
+🪲|Lucane cerf-volant|4|2||Plus grand coléoptère d’Europe
+🪲|Hanneton commun|4|0||Vole au crépuscule
+🪲|Dytique|4|1||Prédateur aquatique
+🪲|Carabe doré|4|0||Chasseur de limaces
+🪲|Bousier|4|1||Roule des boules de crottin
+🪲|Capricorne du chêne|4|2||Longues antennes
+🪲|Longicorne arlequin|4|2||Plus long coléoptère connu
+🪲|Scarabée titan|4|3||Un des plus grands insectes du monde
+🪲|Scarabée rhinocéros|4|1||Corne frontale
+🪲|Charançon|4|1||Rostre allongé
+🪲|Coccinelle à sept points|4|0||Coccinelle la plus commune
+🪲|Taupin|4|1||Saute pour se retourner
+🪲|Ver luisant|4|2||Larves lumineuses
+🪲|Bupreste|4|1||Élytres métalliques
+🦗|Sauterelle verte|4|0||Grande sauterelle des prairies
+🦗|Courtilière|4|0||Creuse des galeries
+🦗|Criquet migrateur|4|1||Peut former des nuées
+🦗|Éphippigère|4|1||Chante en été
+🦗|Dectique verrucivore|4|1||Mange des insectes
+🦗|Weta géant|4|3||Plus lourd des insectes
+🦟|Demoiselle|4|1||Libellule fine et colorée
+🦟|Anax empereur|4|2||Grande libellule bleue
+🦟|Aeschne bleue|4|0||Libellule chasseuse
+🦟|Éphémère|4|1||Vie adulte très brève
+🦟|Perle|4|0||Indicateur de rivières propres
+🦟|Trichoptère|4|0||Larve à fourreau
+🦟|Gerris|4|0||Marche sur l’eau
+🦟|Notonecte|4|1||Nage sur le dos
+🦟|Punaise verte|4|0||Odeur piquante
+🦟|Cicadelle|4|0||Saute de feuille en feuille
+🦟|Puceron|4|0||Se multiplie très vite
+🦟|Cochenille|4|0||Source de colorant rouge
+🦟|Perce-oreille|4|0||Pince à l’arrière
+🦟|Hémérobe|4|1||Larves prédatrices
+🦟|Fourmilion|4|1||Piège en entonnoir
+🦟|Moucheron|4|0||Minuscule voleur de fruits
+🦟|Taon|4|0||Mouche piqueuse
+🦟|Syrphe|4|1||Mouche imitant la guêpe
+🦟|Tipule|4|0||Grand moustique inoffensif
+🦟|Drosophile|4|1||Mouche des fruits utilisée en laboratoire
+🦖|Tyrannosaure|5|5|68–66 Ma|Terrible prédateur du Crétacé
+🦕|Diplodocus|5|3|~150 Ma|Dinosaure au cou immense
+🦣|Mammouth laineux|5|3|disparu ~4000 ans|Géant des steppes glacées
+🐅|Smilodon|5|3|2,5 Ma–10 000 ans|Tigre à dents de sabre
+🦖|Vélociraptor|5|2|~75 Ma|Petit dinosaure rapide
+🦕|Brachiosaure|5|3|~150 Ma|Dinosaure aux pattes avant longues
+🦖|Spinosaure|5|3|~95 Ma|Dinosaure semi-aquatique
+🦈|Mégalodon|5|3|23–3,6 Ma|Requin géant disparu
+🦖|Allosaure|5|3|~150 Ma|Grand prédateur du Jurassique
+🦕|Stégosaure|5|2|~150 Ma|Dinosaure à plaques dorsales
+🦖|Tricératops|5|3|68–66 Ma|Dinosaure à trois cornes
+🦏|Rhinocéros laineux|5|2|disparu il y a ~14 000 ans|Géant des steppes glacées
+🦕|Argentinosaure|5|4|~95 Ma|Parmi les plus grands dinosaures
+🦅|Ptéranodon|5|3|~85 Ma|Reptile volant du Crétacé
+🦈|Dunkleosteus|5|3|~360 Ma|Poisson cuirassé géant du Dévonien
+🦖|Giganotosaurus|5|2|~99 Ma|Géant carnivore de Patagonie
+🦖|Carnotaurus|5|2|~70 Ma|Cornes au-dessus des yeux
+🦖|Utahraptor|5|2|~125 Ma|Plus grand dromaeosauridé
+🦖|Dilophosaure|5|2|~190 Ma|Deux crêtes sur la tête
+🦖|Compsognathus|5|1|~150 Ma|Petit dinosaure de la taille d’un poulet
+🦖|Ceratosaure|5|1|~150 Ma|Carnivore à corne nasale
+🦖|Baryonyx|5|2|~125 Ma|Museau de crocodile et grande griffe
+🦖|Coelophysis|5|0|~210 Ma|Agile chasseur du Trias
+🦖|Herrerasaure|5|2|~230 Ma|Un des premiers dinosaures
+🦖|Albertosaure|5|3|~70 Ma|Cousin du tyrannosaure
+🦖|Oviraptor|5|1|~75 Ma|Dinosaure à bec sans dents
+🦖|Deinonychus|5|3|~110 Ma|Griffe en faucille
+🦖|Pachycéphalosaure|5|2|~70 Ma|Crâne en dôme
+🦕|Apatosaure|5|2|~150 Ma|Long cou de sauropode
+🦕|Camarasaure|5|2|~150 Ma|Sauropode au crâne massif
+🦕|Titanosaure|5|4|~100 Ma|Parmi les plus grands animaux terrestres
+🦕|Dreadnoughtus|5|4|~77 Ma|Géant de Patagonie
+🦕|Amargasaure|5|2|~125 Ma|Épines dorsales doubles
+🦕|Mamenchisaure|5|2|~160 Ma|Cou d’environ 15 m
+🦕|Parasaurolophus|5|2|~76 Ma|Crête creuse en trompette
+🦕|Iguanodon|5|1|~125 Ma|Pouce en pointe
+🦕|Maiasaura|5|1|~76 Ma|Dinosaure « bonne mère »
+🦕|Edmontosaurus|5|2|~70 Ma|Dinosaure à bec de canard
+🦕|Ankylosaure|5|2|~68 Ma|Queue en massue
+🦕|Kentrosaure|5|2|~155 Ma|Piquants sur le dos
+🦕|Pachyrhinosaure|5|2|~72 Ma|Cératopsien à bosse nasale
+🦕|Styracosaure|5|2|~75 Ma|Collerette hérissée de cornes
+🦕|Protocératops|5|1|~75 Ma|Petit cératopsien du désert de Gobi
+🦅|Archaeopteryx|5|4|~150 Ma|Pont entre dinosaures et oiseaux
+🦅|Quetzalcoatlus|5|4|~68 Ma|Plus grand reptile volant
+🦅|Ptérodactyle|5|1|~150 Ma|Reptile volant du Jurassique
+🦅|Rhamphorhynchus|5|2|~150 Ma|Reptile volant à longue queue
+🦈|Hélicoprion|5|2|~280 Ma|Mâchoire en spirale de dents
+🦈|Cladoselache|5|1|~370 Ma|Requin ancien du Dévonien
+🐟|Tiktaalik|5|3|~375 Ma|Poisson aux pattes naissantes
+🐚|Anomalocaris|5|2|~500 Ma|Prédateur du Cambrien
+🐛|Opabinia|5|2|~505 Ma|Cinq yeux au Cambrien
+🐛|Hallucigenia|5|2|~505 Ma|Créature à épines du Cambrien
+🦂|Eurypterus|5|2|~420 Ma|Scorpion de mer géant
+🦟|Meganeura|5|2|~300 Ma|Libellule géante du Carbonifère
+🐊|Sarcosuchus|5|2|~110 Ma|Crocodile géant du Crétacé
+🐊|Deinosuchus|5|2|~75 Ma|Crocodile colossal d’Amérique
+🐍|Titanoboa|5|4|~60 Ma|Plus grand serpent connu
+🦎|Mosasaure|5|2|~70 Ma|Grand reptile marin
+🦎|Ichtyosaure|5|1|~200 Ma|Reptile marin en forme de dauphin
+🦎|Plésiosaure|5|3|~200 Ma|Long cou et nageoires
+🦎|Dimétrodon|5|2|~280 Ma|Voile dorsale, pas un dinosaure
+🦎|Liopleurodon|5|2|~160 Ma|Prédateur marin du Jurassique
+🐘|Gomphothère|5|2|~15 Ma|Ancêtre à quatre défenses
+🐘|Mastodonte|5|2|~3 Ma|Cousin du mammouth
+🐘|Deinotherium|5|2|~10 Ma|Défenses tournées vers le bas
+🦏|Paraceratherium|5|4|~30 Ma|Plus grand mammifère terrestre connu
+🐅|Machairodus|5|2|~8 Ma|Félin à dents en sabre
+🐻|Ours des cavernes|5|2|~40 000 ans|Géant des grottes d’Europe
+🦌|Mégacéros|5|3|~7 700 ans|Cerf géant aux bois immenses
+🦥|Megatherium|5|2|~10 000 ans|Paresseux géant de la taille d’un éléphant
+🦣|Mammouth colombien|5|3|~11 000 ans|Géant d’Amérique du Nord
+🐺|Loup sinistre|5|3|~10 000 ans|Grand loup de l’ère glaciaire
+🦁|Lion des cavernes|5|2|~12 000 ans|Félin géant de l’ère glaciaire
+🦏|Elasmothérium|5|4|~39 000 ans|Rhinocéros à corne géante
+🐊|Postosuchus|5|1|~220 Ma|Prédateur du Trias
+🐢|Archélon|5|2|~75 Ma|Plus grande tortue marine
+🦎|Édaphosaure|5|2|~290 Ma|Voile sur le dos
+🐟|Leedsichthys|5|4|~160 Ma|Plus grand poisson osseux connu
+🦖|Therizinosaure|5|3|~70 Ma|Griffes de 70 cm
+🦖|Gallimimus|5|1|~70 Ma|Dinosaure coureur « imitateur de poulet »
+🦖|Sinosauropteryx|5|3|~125 Ma|Premier dinosaure à plumes découvert
+🦖|Microraptor|5|3|~120 Ma|Dinosaure à quatre ailes
+🦖|Pyroraptor|5|2|~70 Ma|Dinosaure retrouvé en France
+🦤|Dodo|6|3|disparu vers 1681|Oiseau de l’île Maurice
+🐅|Tigre de Tasmanie|6|5|dernier mort en 1936|Marsupial carnivore, ou thylacine
+🕊️|Pigeon voyageur|6|3|disparu en 1914|Volait en bandes de millions
+🐂|Auroch|6|3|disparu en 1627|Ancêtre des bovins domestiques
+🦭|Rhytine de Steller|6|4|disparue vers 1768|Grand mammifère marin
+🐧|Grand pingouin|6|3|disparu en 1844|Oiseau marin de l’Atlantique Nord
+🐦|Moa géant|6|4|disparu vers 1500|Oiseau géant de Nouvelle-Zélande
+🦓|Quagga|6|3|dernier mort en 1883|Zèbre d’Afrique du Sud
+🦜|Perruche de Caroline|6|3|disparue en 1918|Seul perroquet des États-Unis de l’Est
+🦤|Dodo de Rodrigues|6|2|disparu vers 1760|Oiseau de l’île Rodrigues
+🐦|Grand moa|6|4|disparu vers 1400|Plus haut oiseau connu
+🦅|Aigle de Haast|6|3|disparu vers 1400|Plus grand aigle connu
+🐘|Éléphant nain de Chypre|6|2|disparu ~8000 av. J.-C.|Petit éléphant insulaire
+🦛|Hippopotame nain de Madagascar|6|2|disparu vers 1000|Hippopotame insulaire
+🦧|Lémurien paresseux géant|6|2|disparu vers 1500|Grand lémurien de Madagascar
+🐦|Oiseau-éléphant|6|3|disparu vers 1000|Plus lourd oiseau connu
+🐢|Tortue géante des Mascareignes|6|2|disparue vers 1840|Géante insulaire
+🐖|Tigre de Java|6|3|disparu vers 1980|Disparu de son île
+🐅|Tigre de Bali|6|3|disparu vers 1937|Plus petit tigre connu
+🐅|Lion du Cap|6|4|disparu vers 1865|Lion à crinière noire
+🦌|Cerf de Schomburgk|6|2|disparu vers 1932|Cerf aux bois branchus de Thaïlande
+🐐|Bouquetin des Pyrénées|6|4|disparu en 2000|Bouquetin de la montagne ibérique
+🐒|Singe des Caraïbes|6|2|disparu vers 1500|Primate des Antilles
+🐋|Baleine grise de l’Atlantique|6|3|disparue vers 1700|Population disparue de l’océan Atlantique
+🦆|Canard du Labrador|6|2|disparu en 1878|Disparu du nord-est de l’Amérique
+🐦|Tourte voyageuse|6|3|disparue en 1914|Milliards d’individus avant sa chute
+🦜|Ara de Cuba|6|2|disparu vers 1864|Perroquet des Caraïbes
+🐍|Serpent de l’île Ronde|6|2|disparu vers 2000|Reptile rare de l’île Maurice
+🦎|Gecko géant de Delcourt|6|2|disparu au XIXe siècle|Plus grand gecko connu, disparu
+🐙|Pieuvre géante du Pacifique|7|2||Invertébré intelligent à huit bras
+🪼|Méduse|7|1||Animal gélatineux sans cerveau
+🦑|Calmar colossal|7|4||Plus grand invertébré connu
+🦀|Crabe-araignée géant|7|2||Plus grande envergure d’arthropode
+🐚|Nautile|7|2||Fossile vivant à coquille spiralée
+🦞|Homard européen|7|1||Crustacé des fonds rocheux
+⭐|Étoile de mer|7|0||Se régénère après une blessure
+🪸|Corail|7|2||Animal bâtisseur de récifs
+🐳|Cachalot|7|3||Plongeur des grandes profondeurs
+🦭|Phoque commun|7|1||Mammifère marin des côtes
+🦈|Requin-marteau|7|2||Tête en forme de marteau
+🐙|Poulpe commun|7|1||Maître du camouflage
+🐙|Pieuvre à anneaux bleus|7|2||Petite mais très venimeuse
+🐙|Pieuvre dumbo|7|2||Oreilles de nageoires
+🐙|Poulpe mimétique|7|2||Imite d’autres animaux
+🐙|Argonaute|7|2||Coquille d’œufs de pieuvre
+🦑|Calmar de Humboldt|7|1||Chasse en bancs
+🦑|Calmar luciole|7|2||Brille dans le noir
+🦑|Calmar-vampire|7|4||Habitant des profondeurs
+🦑|Seiche commune|7|1||Camouflage fascinant
+🦑|Seiche géante|7|2||Plus grande seiche
+🦑|Calmar commun|7|1||Petit calmar côtier
+🐚|Coquille Saint-Jacques|7|0||Coquille symbole de pèlerinage
+🐚|Huître|7|0||Mollusque bivalve
+🐚|Moule|7|0||Vit en bancs accrochés
+🐚|Palourde|7|0||Coquillage fouisseur
+🐚|Bénitier géant|7|3||Plus grand bivalve
+🐚|Murex|7|2||Source de pourpre antique
+🐚|Cône marin|7|3||Escargot marin venimeux
+🐚|Porcelaine|7|1||Coquille lisse et brillante
+🐚|Bigorneau|7|0||Petit escargot de mer
+🐚|Patelle|7|0||Se colle aux rochers
+🐚|Ormeau|7|2||Nacre irisée
+🐚|Strombe|7|0||Grande coquille rose
+🐚|Limace de mer|7|1||Couleurs éclatantes
+🐚|Dragon bleu|7|3||Nudibranche qui flotte
+🐚|Nudibranche|7|2||Couleurs de vitrail
+🐚|Lièvre de mer|7|2||Limace marine
+🦀|Crabe tourteau|7|0||Pinces puissantes
+🦀|Crabe vert|7|0||Crabe côtier commun
+🦀|Crabe royal du Kamtchatka|7|3||Géant des eaux froides
+🦀|Crabe violoniste|7|2||Une grande pince
+🦀|Crabe des cocotiers|7|2||Plus grand arthropode terrestre
+🦀|Bernard-l’ermite|7|0||Habite des coquilles
+🦀|Crabe de Noël|7|2||Migration rouge
+🦞|Langouste rouge|7|1||Sans grandes pinces
+🦞|Écrevisse|7|1||Habitant des ruisseaux
+🦞|Crevette mante|7|2||Frappe à grande vitesse
+🦞|Crevette nettoyeuse|7|1||Nettoie les poissons
+🦞|Krill|7|1||Base de la chaîne alimentaire polaire
+🦞|Langoustine|7|1||Petit crustacé des profondeurs
+🦞|Pouce-pied|7|2||Crustacé fixé aux rochers
+⭐|Étoile de mer rouge|7|0||Bras rouges
+⭐|Oursin|7|0||Piquants défensifs
+⭐|Concombre de mer|7|1||Éboueur des fonds marins
+⭐|Ophiure|7|0||Bras flexibles de l’étoile fragile
+⭐|Dollar des sables|7|0||Échinoderme aplati
+⭐|Couronne d’épines|7|3||Étoile de mer dévoreuse de coraux
+🪼|Cuboméduse|7|2||Venin très dangereux
+🪼|Méduse lune|7|1||Transparente à quatre anneaux
+🪼|Physalie|7|3||Siphonophore venimeux
+🪼|Méduse immortelle|7|4||Peut rajeunir
+🪼|Rhizostome|7|1||Grande méduse de Méditerranée
+🪼|Cténophore|7|2||Éclats de lumière irisée
+🪸|Corail rouge|7|2||Bijou de Méditerranée
+🪸|Corail cerveau|7|2||Colonie sphérique
+🪸|Anémone de mer|7|0||Abri du poisson-clown
+🪸|Gorgone|7|2||Éventail de corail mou
+🪸|Éponge de mer|7|1||Animal filtreur
+🪸|Éponge géante|7|1||Peut vivre des siècles
+🪸|Tube-ver|7|1||Panache de vers marins
+🪸|Ver de Pompéi|7|3||Résiste à la chaleur extrême
+🦭|Phoque léopard|7|3||Chasseur polaire
+🦭|Phoque de Weddell|7|1||Plonge à 600 m
+🦭|Otarie de Steller|7|3||Plus grande otarie
+🦭|Loutre de mer de Californie|7|2||Utilise des outils
+🐢|Tortue olivâtre|7|1||Pontes en masse
+🐢|Tortue de Kemp|7|3||Plus petite tortue marine
+🕷️|Tégénaire domestique|8|0||Araignée des maisons
+🦂|Scorpion empereur|8|2||Grand scorpion d’Afrique de l’Ouest
+🕷️|Mygale Goliath|8|3||Une des plus grosses araignées
+🕷️|Veuve noire|8|2||Venin neurotoxique
+🕸️|Épeire diadème|8|1||Tisse de grandes toiles rondes
+🪲|Tique|8|1||Parasite vecteur de maladies
+🕷️|Araignée-loup|8|1||Chasse sans toile
+🕷️|Araignée sauteuse|8|1||Vue excellente, chasse en bondissant
+🕷️|Araignée-crabe|8|0||Chasse à l’affût sur les fleurs
+🕷️|Épeire fasciée|8|0||Toile ronde rayée
+🕷️|Argyronète|8|2||Seule araignée aquatique
+🕷️|Mygale rose du Chili|8|1||Mygale douce
+🕷️|Mygale à genoux rouges|8|1||Mygale colorée
+🕷️|Mygale orange|8|2||Mygale de Colombie
+🕷️|Araignée-banane|8|1||Venin puissant
+🕷️|Araignée recluse brune|8|2||Venin nécrosant
+🕷️|Araignée-violon|8|1||Marque en forme de violon
+🕷️|Araignée-paon|8|2||Danse de séduction colorée
+🕷️|Araignée-crapaud|8|1||Corps trapu
+🕷️|Tarentule|8|0||Araignée-loup d’Europe
+🕷️|Araignée d’eau|8|1||Marche sur les mares
+🕷️|Segestria|8|1||Piège de soie en tube
+🕷️|Araignée-lutteuse|8|1||Puissante araignée du désert
+🕷️|Araignée-éclair|8|2||Chasse à grande vitesse
+🕷️|Araignée-ogre|8|2||Lance une toile en filet
+🕷️|Araignée de Darwin|8|3||Toile géante de Madagascar
+🕷️|Faucheux|8|0||Longues pattes fines
+🦂|Scorpion jaune|8|1||Scorpion très venimeux
+🦂|Scorpion noir d’Europe|8|0||Petit scorpion nocturne
+🦂|Scorpion-fouet|8|3||Défense acide
+🦂|Pseudoscorpion|8|1||Minuscule, sans queue
+🦂|Solifuge|8|1||Arachnide très rapide
+🦂|Limule|8|3||Sang bleu, fossile vivant
+🪲|Acarien|8|0||Minuscule arachnide
+🪲|Tique des bois|8|1||Parasite des forêts
+🐸|Grenouille rousse|9|0||Brune des prairies fraîches
+🐸|Grenouille verte|9|0||Chante dans les étangs
+🐸|Grenouille rieuse|9|1||Rire sonore d’Europe
+🐸|Rainette verte|9|0||Petite grimpeuse
+🐸|Rainette aux yeux rouges|9|1||Yeux rouges éclatants
+🐸|Crapaud commun|9|0||Peau verruqueuse
+🐸|Crapaud accoucheur|9|1||Le mâle porte les œufs
+🐸|Crapaud calamite|9|0||Chante très fort
+🐸|Sonneur à ventre jaune|9|2||Ventre jaune d’alerte
+🐸|Pélobate brun|9|2||Fouisseur discret
+🐸|Alyte|9|2||Mâle porteur d’œufs
+🐸|Grenouille taureau|9|2||Plus grande grenouille d’Amérique du Nord
+🐸|Grenouille goliath|9|3||Plus grande grenouille du monde
+🐸|Grenouille arlequin|9|2||Couleurs vives
+🐸|Dendrobate bleu|9|2||Venimeuse d’Amérique du Sud
+🐸|Dendrobate fraise|9|1||Petite grenouille venimeuse
+🐸|Grenouille de verre|9|2||Ventre transparent
+🐸|Grenouille volante|9|3||Plane entre les arbres
+🐸|Grenouille tomate|9|1||Rouge vif de Madagascar
+🐸|Grenouille cornue|9|1||Gueule énorme
+🐸|Grenouille de Surinam|9|3||Porte ses œufs sur le dos
+🐸|Xénope lisse|9|1||Grenouille d’Afrique du Sud
+🐸|Grenouille des bois|9|2||Résiste au gel
+🐸|Grenouille léopard|9|1||Taches sombres
+🐸|Grenouille dorée du Panama|9|3||Symbole menacé
+🐸|Crapaud buffle|9|1||Crapaud toxique invasif
+🐸|Crapaud doré|9|3||Éteint depuis 1989
+🐸|Crapaud de Surinam|9|3||Plat comme une feuille
+🐸|Crapaud goliath|9|1||Grand crapaud d’Afrique
+🐸|Grenouille de Darwin|9|2||Les mâles couvent les têtards dans leur gorge
+🦎|Salamandre tachetée|9|1||Noire et jaune
+🦎|Salamandre noire|9|2||Salamandre des Alpes
+🦎|Triton crêté|9|1||Crête dorsale du mâle
+🦎|Triton alpestre|9|0||Ventre orangé
+🦎|Triton palmé|9|1||Pattes palmées
+🦎|Triton ponctué|9|0||Petit triton commun
+🦎|Salamandre des cavernes|9|2||Aveugle des grottes
+🦎|Protée|9|4||Amphibien troglodyte européen
+🦎|Axolotl blanc|9|2||Variété albinos
+🦎|Salamandre rouge|9|0||Rouge vif
+🦎|Menopome|9|2||Géant d’Amérique du Nord
+🦎|Salamandre géante du Japon|9|4||Peut dépasser 1 m
+🦎|Amphiume|9|1||Amphibien en forme d’anguille
+🦎|Cécilie|9|2||Amphibien sans pattes
+🦎|Necture|9|1||Branchies externes
+🦎|Siren|9|2||Amphibien sans pattes arrière
+🏛️|Parthénon|10|2|447–432 av. J.-C.|Temple d’Athéna à Athènes
+👑|Alexandre le Grand|10|5|356–323 av. J.-C.|Roi de Macédoine, conquérant de la Perse
+⚔️|Bataille de Marathon|10|2|490 av. J.-C.|Les Grecs repoussent les Perses
+🔥|Jeux olympiques antiques|10|1|776 av. J.-C.|Premiers Jeux enregistrés à Olympie
+🧠|Socrate|10|1|470–399 av. J.-C.|Père de la philosophie morale
+🛡️|Thermopyles|10|3|480 av. J.-C.|Léonidas retient l’armée perse
+🏛️|Cyrus le Grand|10|2|règne 559–530 av. J.-C.|Fondateur de l’Empire perse
+🏛️|Périclès|10|2|495–429 av. J.-C.|Âge d’or d’Athènes
+🧠|Aristote|10|2|384–322 av. J.-C.|Précepteur d’Alexandre
+👑|Toutânkhamon|11|3|vers 1332–1323 av. J.-C.|Pharaon à la tombe intacte
+🔺|Pyramide de Khéops|11|4|vers 2560 av. J.-C.|Seule merveille antique encore debout
+👸|Cléopâtre VII|11|3|69–30 av. J.-C.|Dernière reine d’Égypte ptolémaïque
+🪨|Pierre de Rosette|11|2|196 av. J.-C.|Clé du déchiffrement des hiéroglyphes
+👑|Ramsès II|11|3|1279–1213 av. J.-C.|Pharaon bâtisseur
+🗿|Sphinx de Gizeh|11|2|vers 2500 av. J.-C.|Corps de lion, visage de pharaon
+🔺|Hatchepsout|11|3|règne vers 1479–1458 av. J.-C.|Femme pharaon
+📜|Hiéroglyphes|11|1||Écriture sacrée de l’Égypte
+⚱️|Momification|11|2|dès ~2600 av. J.-C.|Conservation des corps
+⚔️|Jules César|12|4|100–44 av. J.-C.|Conquiert la Gaule
+🏟️|Colisée|12|2|inauguré en 80|Amphithéâtre de Rome
+👑|Auguste|12|3|27 av. J.-C.|Premier empereur romain
+🐘|Hannibal|12|3|218 av. J.-C.|Traverse les Alpes avec ses éléphants
+🛣️|Voies romaines|12|0||Réseau routier de l’Empire
+🔥|Chute de Rome d’Occident|12|3|476|Fin de l’Empire romain d’Occident
+⚔️|Spartacus|12|2|73–71 av. J.-C.|Chef d’une révolte d’esclaves
+⚔️|Bataille d’Actium|12|2|31 av. J.-C.|Octave bat Antoine et Cléopâtre
+🌋|Pompéi|12|3|79|Détruite par l’éruption du Vésuve
+✝️|Constantin|12|3|272–337|Premier empereur romain chrétien
+🏛️|Panthéon de Rome|12|2|vers 126|Temple à immense coupole
+👑|Charlemagne|13|3|couronné en 800|Empereur d’Occident
+⚔️|Bataille d’Hastings|13|2|1066|Guillaume conquiert l’Angleterre
+🛡️|Jeanne d’Arc|13|4|1412–1431|Héroïne de la guerre de Cent Ans
+🏰|Château fort|13|0||Résidence et forteresse féodale
+🦠|Peste noire|13|3|1347–1353|Pandémie dévastatrice en Europe
+⚔️|Saladin|13|3|prend Jérusalem en 1187|Sultan d’Égypte et de Syrie
+📜|Magna Carta|13|2|1215|Limite le pouvoir du roi d’Angleterre
+⚔️|Bataille de Poitiers|13|2|732|Charles Martel arrête l’avancée omeyyade
+⛪|Notre-Dame de Paris|13|3|début en 1163|Cathédrale gothique
+👑|Richard Cœur de Lion|13|2|1157–1199|Roi d’Angleterre et croisé
+⛵|Christophe Colomb|14|3|1492|Atteint les Amériques
+🧭|Magellan|14|3|1519–1522|Première circumnavigation
+🌊|Vasco de Gama|14|2|1498|Route maritime vers l’Inde
+🧭|Boussole|14|0||Outil clé de la navigation
+⛵|Jacques Cartier|14|2|1534|Explore le Canada pour la France
+🗺️|James Cook|14|2|1768–1779|Explore le Pacifique
+🗺️|Marco Polo|14|2|1271–1295|Voyage jusqu’en Chine
+🗺️|Amerigo Vespucci|14|2|1454–1512|Le continent américain porte son prénom
+🧊|Roald Amundsen|14|3|1911|Premier au pôle Sud
+🏔️|Hillary et Tensing|14|3|29 mai 1953|Premiers au sommet de l’Everest
+🏰|Prise de la Bastille|15|3|14 juillet 1789|Symbole de la Révolution
+📜|Déclaration des droits|15|3|26 août 1789|Droits de l’homme et du citoyen
+🔪|Guillotine|15|1|1792|Instrument d’exécution de la Terreur
+👑|Louis XVI|15|2|exécuté en 1793|Dernier roi de l’Ancien Régime
+⚔️|Napoléon Bonaparte|15|4|coup d’État en 1799|Général puis empereur des Français
+🎵|La Marseillaise|15|1|1792|Devenue hymne national
+⚔️|Bataille de Waterloo|15|3|18 juin 1815|Défaite finale de Napoléon
+🗡️|Robespierre|15|2|1758–1794|Figure de la Terreur
+🔫|Bataille de Verdun|16|3|1916|Une des plus longues batailles
+💥|Attentat de Sarajevo|16|2|28 juin 1914|Étincelle de la guerre
+🛩️|Baron rouge|16|3|1892–1918|As allemand de l’aviation
+🕊️|Armistice|16|3|11 novembre 1918|Fin des combats
+🪖|Poilu|16|0||Soldat français de 14-18
+🚜|Char d’assaut|16|2|1916|Premier emploi lors de la Somme
+🪖|Bataille de la Marne|16|2|1914|Arrête l’avancée allemande
+🕊️|Traité de Versailles|16|2|28 juin 1919|Clôt la Première Guerre mondiale
+✈️|Bataille d’Angleterre|17|2|1940|La RAF repousse la Luftwaffe
+🏖️|Débarquement de Normandie|17|4|6 juin 1944|Libération de l’Europe de l’Ouest
+📻|Appel du 18 juin|17|3|1940|De Gaulle appelle à résister
+❄️|Bataille de Stalingrad|17|3|1942–1943|Tournant sur le front de l’Est
+🔐|Machine Enigma|17|2|années 1940|Chiffrement allemand percé à Bletchley
+🕊️|Capitulation du Japon|17|3|1945|Fin de la guerre
+⚓|Bataille de Midway|17|3|1942|Tournant de la guerre du Pacifique
+💣|Pearl Harbor|17|3|7 décembre 1941|Entrée en guerre des États-Unis
+✊|Résistance française|17|2|1940–1944|Lutte clandestine contre l’occupation
+📔|Anne Frank|17|3|1929–1945|Auteure d’un célèbre journal
+🚀|Apollo 11|18|5|20 juillet 1969|Premiers pas sur la Lune
+🧱|Chute du mur de Berlin|18|3|9 novembre 1989|Fin de la guerre froide
+🌍|Création de l’ONU|18|1|1945|Organisation de coopération mondiale
+🌐|Web public|18|3|1991|Ouverture du World Wide Web
+✊|Nelson Mandela|18|3|président en 1994|Fin de l’apartheid
+🛰️|Spoutnik 1|18|3|1957|Premier satellite artificiel
+🗽|Statue de la Liberté|18|2|1886|Offerte par la France aux États-Unis
+🚆|Tunnel sous la Manche|18|2|1994|Relie la France et le Royaume-Uni
+🌍|Accord de Paris|18|2|2015|Cadre mondial contre le réchauffement
+🏅|Jeux olympiques modernes|18|2|1896|Relancés à Athènes
+☢️|Catastrophe de Tchernobyl|18|2|1986|Pire accident nucléaire civil
+📖|Imprimerie de Gutenberg|19|4|vers 1450|Caractères mobiles en Europe
+💡|Ampoule d’Edison|19|2|1879|Éclairage électrique durable
+⚙️|Machine à vapeur de Watt|19|2|1769|Moteur de la révolution industrielle
+✈️|Frères Wright|19|3|1903|Premier vol motorisé
+🔭|Lunette de Galilée|19|2|1609|Observation des lunes de Jupiter
+⚡|Pile de Volta|19|3|1800|Première pile électrique
+💉|Vaccin de Pasteur|19|3|1885|Premier vaccin contre la rage
+🧪|Marie Curie|19|4|1867–1934|Deux prix Nobel scientifiques
+🧬|Structure de l’ADN|19|3|1953|Watson, Crick et Franklin
+💻|Ada Lovelace|19|3|1815–1852|Pionnière de la programmation
+🚂|Locomotive Rocket|19|2|1829|Œuvre de Stephenson
+🚗|Automobile de Benz|19|3|1886|Premier brevet d’automobile
+🎞️|Cinématographe|19|2|1895|Invention des frères Lumière
+📡|Radio de Marconi|19|2|1901|Liaison transatlantique sans fil
+☎️|Téléphone|19|2|1876|Brevet d’Alexander Graham Bell
+🗼|Tour Eiffel|20|0|1889|Tour de fer de 330 m à Paris
+🔔|Big Ben|20|1|1859|Tour de l’horloge du Parlement à Londres
+⛪|Sagrada Família|20|2|commencée en 1882|Basilique inachevée de Gaudí à Barcelone
+🏝️|Mont-Saint-Michel|20|1|VIIIe siècle|Abbaye sur un îlot en Normandie
+🗼|Tour de Pise|20|1|1173–1372|Campanile célèbre pour son inclinaison
+👑|Château de Versailles|20|1|1661–1710|Palais de Louis XIV
+🪨|Stonehenge|20|2|vers 2500 av. J.-C.|Cercle de pierres préhistorique anglais
+🏰|Alhambra|20|3|XIIIe–XIVe siècle|Palais nasride de Grenade
+⛪|Cathédrale Saint-Basile|20|3|1561|Bulbes colorés sur la place Rouge
+🧱|Grande Muraille de Chine|21|1|VIIe s. av. J.-C. – XVIIe s.|Des milliers de kilomètres de remparts
+🕌|Taj Mahal|21|0|1632–1653|Mausolée de marbre blanc en Inde
+🛕|Angkor Vat|21|2|XIIe siècle|Plus grand temple religieux du monde, au Cambodge
+🏯|Cité interdite|21|2|1406–1420|Palais impérial de Pékin
+🛕|Borobudur|21|3|IXe siècle|Gigantesque temple bouddhiste de Java
+🛕|Temple d’Or|21|3|1604|Sanctuaire sikh d’Amritsar
+🏯|Château de Himeji|21|3|1609|Château japonais surnommé le Héron blanc
+🗿|Armée de terre cuite|21|3|vers 210 av. J.-C.|Soldats enterrés avec l’empereur Qin
+🏔️|Palais du Potala|21|4|XVIIe siècle|Ancienne résidence des dalaï-lamas à Lhassa
+🏜️|Petra|22|2|vers IIIe s. av. J.-C.|Cité nabatéenne taillée dans la roche en Jordanie
+🗿|Abou Simbel|22|3|vers 1264 av. J.-C.|Temples de Ramsès II déplacés pour échapper au Nil
+🕌|Dôme du Rocher|22|2|691|Sanctuaire doré de Jérusalem
+🕌|Sainte-Sophie|22|2|537|Basilique devenue mosquée à Istanbul
+🕌|Grande Mosquée de Djenné|22|4|1907|Plus grand édifice en terre crue du monde
+🏰|Aït Ben Haddou|22|4|XVIIe siècle|Ksar fortifié du Maroc
+🏛️|Persépolis|22|3|vers 518 av. J.-C.|Capitale cérémonielle de l’Empire perse
+⛪|Églises de Lalibela|22|4|XIIIe siècle|Églises creusées dans le roc en Éthiopie
+✝️|Christ Rédempteur|23|1|1931|Statue géante dominant Rio de Janeiro
+🏔️|Machu Picchu|23|1|vers 1450|Cité inca perchée dans les Andes
+🔺|Chichén Itzá|23|2|vers 600–1200|Cité maya et sa pyramide El Castillo
+🗿|Mont Rushmore|23|2|1927–1941|Quatre présidents sculptés dans la roche
+🌉|Golden Gate Bridge|23|1|1937|Pont suspendu rouge de San Francisco
+🔺|Teotihuacán|23|3|vers 100 av. J.-C.|Cité des pyramides du Soleil et de la Lune
+🏢|Empire State Building|23|1|1931|Gratte-ciel de 381 m à New York
+🏛️|Maison-Blanche|23|1|1800|Résidence des présidents américains
+🌉|Pont de Brooklyn|23|3|1883|Premier grand pont suspendu en acier
+🎭|Opéra de Sydney|24|1|1973|Toits en voiles au bord de la baie
+🏙️|Burj Khalifa|24|2|2010|Plus haute tour du monde : 828 m
+🌉|Viaduc de Millau|24|3|2004|Plus haut pont de France
+🏢|Taipei 101|24|3|2004|Gratte-ciel en forme de bambou à Taïwan
+🗿|Moaï de l’île de Pâques|24|3|XIIIe–XVIe siècle|Statues géantes de Rapa Nui
+🏗️|Barrage des Trois-Gorges|24|3|2006|Plus grande centrale hydroélectrique du monde
+🎡|London Eye|24|1|2000|Grande roue au bord de la Tamise
+🌉|Pont de l’Øresund|24|4|2000|Pont-tunnel entre Danemark et Suède`.split('\n').map((l,i)=>{const[e,n,c,r,d,t]=l.split('|');return{id:i,e,n,c:+c,r:+r,d,t}});
+const $=id=>document.getElementById(id),KEY='chronocards_v2',DS={own:{},coins:20,q:0,ok:0,best:0,bs:0,ph:1,snd:1,ob:0};
+let S=Object.assign({},DS);try{Object.assign(S,JSON.parse(localStorage.getItem(KEY))||{})}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const shuf=a=>a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(x=>x[1]),wOf=c=>H[c.c][1],cnt=f=>CARDS.filter(c=>S.own[c.id]&&f(c)).length,tot=f=>CARDS.filter(f).length,N=()=>Object.keys(S.own).length,pct=()=>N()/CARDS.length*100;
+const RK=[[0,'Visiteur'],[5,'Curieux'],[15,'Explorateur'],[30,'Guide'],[50,'Conservateur'],[75,'Directeur'],[100,'Maître du Temps']],rank=()=>RK.filter(x=>pct()>=x[0]).pop()[1];
+const bar=(a,b)=>`<div class="bar"><i style="width:${b?a/b*100:0}%"></i></div>`;
+function toast(m){const t=$('ts');t.textContent=m;t.className='on';clearTimeout(toast.t);toast.t=setTimeout(()=>t.className='',2400)}
+/* Effets */
+let ac;const tone=(f,t,d)=>{if(!S.snd)return;try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator(),g=ac.createGain(),s=ac.currentTime+t;o.frequency.value=f;o.type='triangle';g.gain.setValueAtTime(.12,s);g.gain.exponentialRampToValueAtTime(.001,s+d);o.connect(g);g.connect(ac.destination);o.start(s);o.stop(s+d)}catch(e){}};
+const fx=ok=>{if(ok){tone(660,0,.15);tone(880,.12,.25)}else{tone(220,0,.18);tone(165,.15,.25)}try{navigator.vibrate&&navigator.vibrate(ok?18:[35,25,35])}catch(e){}};
+function boom(){const C=['#4f46e5','#f59e0b','#10b981','#ec4899','#3b82f6'];for(let i=0;i<30;i++){const s=document.createElement('span');s.className='cf';s.style.cssText=`left:${8+Math.random()*84}%;background:${C[i%5]};--x:${(Math.random()-.5)*180}px;--r:${Math.random()*720}deg;animation-delay:${Math.random()*.25}s`;document.body.appendChild(s);setTimeout(()=>s.remove(),1800)}}
+const halls=()=>H.filter((h,k)=>cnt(c=>c.c==k)==tot(c=>c.c==k)).length;
+/* Cartes */
+function cd(c,o,clk){const h=c.c*37%360;if(!o)return`<div class="cd lk" style="--h:${h}"><div class="ar">?</div><div class="in"><b>À découvrir</b><small>${H[c.c][0]}</small></div></div>`;
+ return`<div class="cd${c.r>=3?' f':''}" style="--h:${h};--rc:var(--r${c.r})" ${clk?`onclick="${clk}"`:''}><div class="ar" data-i="${c.id}">${c.e}<span class="rb">${RA[c.r]}</span></div><div class="in"><b>${c.n}</b><small>${H[c.c][0]}${c.d?' · '+c.d:''}</small></div></div>`}
+function info(id){const c=CARDS[id],v=IM[id];document.body.insertAdjacentHTML('beforeend',`<div class="ov" onclick="this.remove()"><div class="gl iv" onclick="event.stopPropagation()">${cd(c,1,'')}<div style="flex:1;min-width:190px"><h2>${c.n}</h2><p class="mu">${H[c.c][0]} · ${RA[c.r]}</p>${c.d?`<p>📅 ${c.d}</p>`:''}<p style="margin:8px 0 12px">${c.t}.</p>${v&&v.t?`<p class="mu" style="font-size:12px">Photo : <a target="_blank" rel="noopener" href="https://fr.wikipedia.org/wiki/${encodeURIComponent(v.t.replace(/ /g,'_'))}">Wikipédia · ${v.t}</a></p>`:''}<button class="btn s" onclick="this.closest('.ov').remove()">Fermer</button></div></div></div>`);ob()}
+/* Photos Wikipédia (en ligne) : titre exact, puis recherche, avec alias */
+const AL={'Mars':'Mars (planète)','Vénus':'Vénus (planète)','Mercure':'Mercure (planète)','Jupiter':'Jupiter (planète)','Saturne':'Saturne (planète)','Neptune':'Neptune (planète)','Uranus':'Uranus (planète)','Pluton':'Pluton (planète naine)','Éris':'Éris (planète naine)','Cérès':'Cérès (planète naine)','Titan':'Titan (lune)','Io':'Io (lune)','Europe':'Europe (lune)','Triton':'Triton (lune)','Phobos':'Phobos (lune)','Terre':'Terre','Lune':'Lune','Soleil':'Soleil','Poulpe commun':'Poulpe','Quartz':'Quartz','Jade':'Jade','Opale':'Opale','Gypse':'Gypse','Platine':'Platine','Citron':'Citron (fruit)','Orange':'Orange (fruit)','Cerise':'Cerise','Pêche':'Pêche (fruit)','Thé':'Thé','Riz':'Riz','Maïs':'Maïs','Blé':'Blé','Poilu':'Poilu','Éclair':'Foudre','Séisme':'Séisme','Tornade':'Tornade','Brouillard':'Brouillard','Grêle':'Grêle','Rosée':'Rosée','Givre':'Givre','Dune':'Dune','Falaise':'Falaise','Grotte':'Grotte','Prairie':'Prairie','Lagune':'Lagune','Estuaire':'Estuaire','Atoll':'Atoll','Glacier':'Glacier','Mousse':'Mousse (végétal)','Lichen':'Lichen','Lierre':'Lierre grimpant'},IM=(()=>{try{return JSON.parse(localStorage.cc2_im)||{}}catch(e){return{}}})();
+const WP='https://fr.wikipedia.org/w/api.php?action=query&format=json&origin=*&redirects=1&prop=pageimages%7Cpageprops&piprop=thumbnail&pithumbsize=600&ppprop=disambiguation';
+const okp=x=>x.thumbnail&&!(x.pageprops&&'disambiguation' in x.pageprops),wq=t=>fetch(WP+t).then(r=>r.json()).then(j=>Object.values((j.query||{}).pages||{}));
+async function findImg(c){const n=AL[c.n]||c.n;let p=(await wq('&titles='+encodeURIComponent(n))).find(okp);if(!p)p=(await wq('&generator=search&gsrlimit=6&gsrsearch='+encodeURIComponent(n))).sort((a,b)=>a.index-b.index).find(okp);return p?{u:p.thumbnail.source,t:p.title}:''}
+const sp=(el,v)=>{if(!v||!v.u)return;const i=new Image();i.onload=()=>{el.style.backgroundImage=`url("${v.u}")`;el.classList.add('pi')};i.src=v.u};
+const PQ=[],PE=new Set();let pa=0;
+function pump(){while(pa<4&&PQ.length){const id=PQ.shift();pa++;findImg(CARDS[id]).then(v=>{IM[id]=v;try{localStorage.cc2_im=JSON.stringify(IM)}catch(e){}document.querySelectorAll('.ar[data-i="'+id+'"]').forEach(e=>sp(e,v))}).catch(()=>PE.delete(id)).finally(()=>{pa--;pump()})}}
+function ph(el){const id=el.dataset.i;if(IM[id]!==undefined)return sp(el,IM[id]);if(PE.has(id))return;PE.add(id);PQ.push(id);pump()}
+const io='IntersectionObserver' in window?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){io.unobserve(e.target);ph(e.target)}}),{rootMargin:'250px'}):null;
+function ob(){if(S.ph)document.querySelectorAll('.ar[data-i]:not(.pi)').forEach(e=>io?io.observe(e):ph(e))}
+/* Questions */
+function mkQ(c){const w=wOf(c),dq=w>0&&c.d&&Math.random()<.4,o=[c],seen=new Set([c.d]),ok=x=>x.id!=c.id&&x.n!=c.n;
+ for(const x of shuf(CARDS.filter(x=>ok(x)&&x.c==c.c)).concat(shuf(CARDS.filter(x=>ok(x)&&wOf(x)==w&&x.c!=c.c)))){if(o.length>3)break;if(dq){if(!x.d||seen.has(x.d))continue;seen.add(x.d)}o.push(x)}
+ return{c,o:shuf(o),dq:dq&&o.length>1}}
+let Z=null;
+function start(w,h){const L=CARDS.filter(c=>!S.own[c.id]&&(w<0||wOf(c)==w)&&(h<0||c.c==h));if(!L.length)return toast('Tout est déjà débloqué ici, bravo !');Z={w,h,qs:shuf(L).slice(0,10).map(mkQ),i:0,ok:0,a:null,x:null,un:[]};Q()}
+function ans(k){if(!Z)return;const z=Z,q=z.qs[z.i];if(z.a!==null)return;clearTimeout(z.tm);z.a=k;S.q++;const w=k>=0&&q.o[k].id==q.c.id;if(w){z.ok++;S.ok++;S.own[q.c.id]=1;z.un.push(q.c.id);z.st=(z.st||0)+1;S.bs=Math.max(S.bs||0,z.st);S.coins+=5+(z.st>=3?2:0);boom()}else z.st=0;fx(w);save();Q()}
+function hint(){const z=Z,q=z.qs[z.i];if(z.a!==null||z.x)return;if(S.coins<10)return toast('Pas assez de pièces');S.coins-=10;z.x=shuf(q.o.map((o,k)=>k).filter(k=>q.o[k].id!=q.c.id)).slice(0,2);save();Q()}
+function nx(){const z=Z,n=z.qs.length;z.i++;z.a=null;z.x=null;if(z.i>=n){S.best=Math.max(S.best,z.ok);if(z.ok==n&&n>=5){S.coins+=20;const L=CARDS.filter(c=>!S.own[c.id]&&(z.w<0||wOf(c)==z.w));if(L.length){const b=L[Math.random()*L.length|0];S.own[b.id]=1;z.un.push(b.id)}}save()}Q()}
+function endQ(){if(Z)clearTimeout(Z.tm);const e=$('qz');if(e)e.remove();Z=null;R()}
+function Q(){let e=$('qz');if(!e){document.body.insertAdjacentHTML('beforeend','<div id="qz" class="ov q"></div>');e=$('qz')}const z=Z,n=z.qs.length;
+ if(z.i>=n){const u=z.un.length;if(z.ok>=7&&!z.cf){z.cf=1;boom()}e.innerHTML=`<div class="qw"><button class="x" onclick="endQ()">✕</button><div class="cnt">Partie terminée</div><h1>${z.ok}/${n}</h1><p class="mu">${u} carte${u>1?'s':''} débloquée${u>1?'s':''}${z.ok==n&&n>=5?' · sans-faute 🎉 carte bonus + 20 🪙':''}</p><div class="gr sm">${z.un.map(i=>cd(CARDS[i],1,'')).join('')}</div><p style="margin-top:22px"><button class="btn" onclick="start(${z.w},${z.h})">Rejouer</button><button class="btn s" onclick="share()">📲 Partager</button><button class="btn s" onclick="endQ()">Terminer</button></p></div>`;ob();return}
+ const q=z.qs[z.i],c=q.c,r=z.a!==null,win=r&&z.a>=0&&q.o[z.a].id==c.id;if(!r){if(z.ti!==z.i){z.ti=z.i;z.t0=Date.now();clearTimeout(z.tm);z.tm=setTimeout(()=>{if(Z===z&&z.a===null)ans(-1)},15000)}}
+ e.innerHTML=`<div class="qw"><button class="x" onclick="endQ()">✕</button><div class="top"><span>Question ${z.i+1}/${n}</span><span>${z.st>=2?'🔥 x'+z.st+' · ':''}✅ ${z.ok} · 🪙 ${S.coins}</span></div>${bar(z.i+(r?1:0),n)}${r?'':`<div class="tm"><i style="animation-delay:-${((Date.now()-z.t0)/1000).toFixed(2)}s"></i></div>`}<div class="cnt">${H[c.c][0]}${!q.dq&&c.d?' · 📅 '+c.d:''}</div><h2 class="qt">${q.dq?`${c.e} ${c.n} : c’est quand ?`:`« ${c.t} »`}</h2><div class="opts">${q.o.map((o,k)=>{const cl=r?(o.id==c.id?'ok':z.a==k?'ko':'dim'):(z.x&&z.x.includes(k)?'dim':'');return`<button class="opt ${cl}" ${r||cl?'disabled':''} onclick="ans(${k})">${r&&!q.dq?o.e+' ':''}${q.dq?o.d:o.n}</button>`}).join('')}</div>${r?`<div class="rv">${win?`<div class="cnt ok-t">✨ Carte débloquée !</div>${cd(c,1,'')}`:`<p>${z.a===-1?'⏱️ Temps écoulé ! ':'Raté ! '}C’était <b>${c.n}</b>. Elle reviendra dans une prochaine partie.</p>`}<p class="mu">${c.t}${c.d?' · '+c.d:''}</p><button class="btn" onclick="nx()">${z.i+1>=n?'Résultat':'Suivant'} →</button></div>`:`<p style="margin-top:16px"><button class="btn s" onclick="hint()">💡 50/50 (10 🪙)</button></p>`}</div>`;ob()}
+/* Pages */
+let V='home';const F={w:-1,h:-1,s:'all',n:60};
+function go(v,o){const sw=v!=V;V=v;if(o)Object.assign(F,o);R();if(sw)scrollTo(0,0)}
+const IC={home:'<path d="M3 10.5 12 3l9 7.5V21H3z"/><path d="M9 21v-6h6v6"/>',play:'<path d="M13 2 4 14h7l-1 8 9-12h-7z"/>',cards:'<rect x="4" y="3" width="12" height="16" rx="2"/><path d="M8 21h10a2 2 0 0 0 2-2V7"/>',me:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>'};
+const NAV=[['home','Musée'],['play','Jouer'],['cards','Cartes'],['me','Profil']];
+const wing=(i,body)=>`<div class="gl wing" style="--h:${W[i][2]}"><div class="wi">${W[i][1]}</div><div style="flex:1;min-width:0">${body}</div></div>`;
+const VW={
+home:()=>{const p=Math.round(pct()),nx=RK.find(x=>x[0]>pct());
+ return`<h1>Mon musée</h1><p class="mu">Réponds juste aux questions pour débloquer les cartes. Objectif : remplir tout le musée !</p><div class="hero"><div class="ring" style="--p:${pct()}"><b>${p}%</b></div><div style="flex:1;min-width:200px"><small>TON RANG</small><h2>${rank()}</h2><p class="mu">${N()}/${CARDS.length} cartes débloquées${nx?` · prochain rang à ${nx[0]} %`:''}</p><button class="btn w" onclick="start(-1,-1)">Jouer maintenant</button></div></div><div class="tiles"><div class="gl"><b>${halls()}/${H.length}</b><span>Salles complètes</span></div><div class="gl"><b>🔥 ${S.bs||0}</b><span>Meilleure série</span></div><div class="gl"><b>${S.ok}</b><span>Bonnes réponses</span></div></div><div class="sec">Les ailes du musée</div>${W.map((w,i)=>{const a=cnt(c=>wOf(c)==i),b=tot(c=>wOf(c)==i);return wing(i,`<h3>${w[0]}</h3><p class="mu" style="margin-bottom:0">${a}/${b} cartes · ${H.filter(h=>h[1]==i).length} salles</p>${bar(a,b)}<button class="btn" onclick="start(${i},-1)">Jouer</button><button class="btn s" onclick="go('cards',{w:${i},h:-1,s:'all',n:60})">Visiter</button>`)}).join('')}`},
+play:()=>`<h1>Jouer</h1><p class="mu">10 questions par partie. Chaque bonne réponse débloque une carte. Un sans-faute offre une carte bonus et 20 🪙.</p>${W.map((w,i)=>wing(i,`<h3>${w[0]}</h3><button class="btn" onclick="start(${i},-1)">Toute l’aile</button><div class="chips">${H.map((h,k)=>h[1]==i?`<button class="chip" onclick="start(${i},${k})">${h[0]}<b>${cnt(c=>c.c==k)}/${tot(c=>c.c==k)}</b></button>`:'').join('')}</div>`)).join('')}`,
+cards:()=>{const a=CARDS.filter(c=>(F.w<0||wOf(c)==F.w)&&(F.h<0||c.c==F.h)&&(F.s=='all'||(F.s=='own')==!!S.own[c.id])),n=a.length;
+ return`<h1>Cartes</h1><div class="chips">${[[-1,'Toutes'],...W.map((w,i)=>[i,w[1]+' '+w[0]])].map(x=>`<button class="chip ${F.w==x[0]?'on':''}" onclick="go('cards',{w:${x[0]},h:-1,n:60})">${x[1]}</button>`).join('')}</div><div class="chips"><select onchange="go('cards',{h:+this.value,n:60})"><option value="-1">Toutes les salles</option>${H.map((h,k)=>F.w<0||h[1]==F.w?`<option value="${k}" ${F.h==k?'selected':''}>${h[0]}</option>`:'').join('')}</select>${[['all','Tout'],['own','Débloquées'],['no','À découvrir']].map(x=>`<button class="chip ${F.s==x[0]?'on':''}" onclick="go('cards',{s:'${x[0]}',n:60})">${x[1]}</button>`).join('')}</div><p class="mu">${n} carte${n>1?'s':''}</p><div class="gr">${a.slice(0,F.n).map(c=>cd(c,S.own[c.id],S.own[c.id]?`info(${c.id})`:'')).join('')}</div>${n>F.n?`<p style="text-align:center;margin-top:16px"><button class="btn s" onclick="go('cards',{n:F.n+60})">Afficher plus</button></p>`:''}`},
+me:()=>`<h1>Profil</h1><div class="gl"><div class="st"><div><b>${N()}</b><span>Cartes</span></div><div><b>${S.ok}/${S.q}</b><span>Bonnes réponses</span></div><div><b>${S.best}/10</b><span>Meilleure partie</span></div><div><b>${S.coins} 🪙</b><span>Pièces</span></div></div></div><div class="gl" style="margin-top:14px"><b>Inviter tes amis</b><p class="mu">Envoie-leur le jeu et ton rang : qui remplira son musée le plus vite ?</p><button class="btn" onclick="share()">📲 Partager</button></div><div class="gl" style="margin-top:14px"><b>Sauvegarde</b><p class="mu">Ta progression est enregistrée sur cet appareil.</p><button class="btn s" onclick="exp()">⬇ Exporter</button><button class="btn s" onclick="$('im').click()">⬆ Importer</button><input type="file" id="im" accept=".json" hidden onchange="imp(this.files[0])"><button class="btn s" onclick="S.ph=S.ph?0:1;save();R()">Photos Wikipédia : ${S.ph?'oui':'non'}</button><button class="btn s" onclick="S.snd=S.snd?0:1;save();R()">Sons : ${S.snd?'oui':'non'}</button><button class="btn d" onclick="if(confirm('Tout effacer ?')){S=Object.assign({},DS,{own:{}});save();R()}">Réinitialiser</button></div><p class="mu" style="margin-top:16px;font-size:12px">Photos : Wikipédia / Wikimedia Commons (licences libres).</p>`};
+function R(){$('hd').innerHTML=`<div class="brand"><div class="lg">C</div><div>Chrono<span>cards</span></div></div><div class="pills"><span class="pill">🪙 ${S.coins}</span><span class="pill">${N()}/${CARDS.length}</span></div>`;$('nv').innerHTML=NAV.map(n=>`<button class="${V==n[0]?'on':''}" onclick="go('${n[0]}')"><svg viewBox="0 0 24 24">${IC[n[0]]}</svg>${n[1]}</button>`).join('');$('app').innerHTML='<div class="view">'+VW[V]()+'</div>';ob()}
+function share(){const t=`Je suis ${rank()} dans CHRONOCARDS : ${N()}/${CARDS.length} cartes débloquées. Fais mieux !`,u=location.href.split('#')[0];if(navigator.share)navigator.share({title:'CHRONOCARDS',text:t,url:u}).catch(()=>{});else try{navigator.clipboard.writeText(t+' '+u).then(()=>toast('Message copié !'))}catch(e){toast('Copie impossible')}}
+function exp(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(S)],{type:'application/json'}));a.download='chronocards-sauvegarde.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+function imp(f){if(!f)return;const r=new FileReader();r.onload=()=>{try{const j=JSON.parse(r.result);if(!j||typeof j.own!='object')throw 0;S=Object.assign({},DS,j);save();R();toast('Sauvegarde importée')}catch(e){toast('Fichier invalide')}};r.readAsText(f)}
+document.addEventListener('keydown',e=>{if(e.key=='Escape'){const o=document.querySelector('.ov:not(#qz)');if(o)o.remove()}});
+window.addEventListener('error',e=>{const b=document.createElement('div');b.style.cssText='position:fixed;top:0;left:0;right:0;background:#dc2626;color:#fff;padding:8px;font:13px monospace;z-index:120';b.textContent='Erreur : '+e.message;document.body.appendChild(b)});
+function welcome(){document.body.insertAdjacentHTML('beforeend',`<div class="ov q" id="wl"><div class="qw"><div class="lg" style="width:72px;height:72px;font-size:34px;border-radius:22px;margin:0 auto 18px">C</div><h1>Bienvenue !</h1><p class="mu">Remplis ton musée en répondant juste.</p><div class="gl" style="text-align:left;margin:18px 0"><p><b>1.</b> Choisis une aile : animaux, histoire ou monuments.</p><p style="margin-top:10px"><b>2.</b> Réponds à 10 questions : chaque bonne réponse débloque une carte.</p><p style="margin-top:10px"><b>3.</b> Enchaîne les bonnes réponses 🔥 pour gagner des pièces bonus, et sois rapide : 15 secondes par question !</p></div><button class="btn" onclick="S.ob=1;save();$('wl').remove()">C’est parti !</button></div></div>`)}
+R();if(!S.ob)welcome();
+if('serviceWorker' in navigator&&location.protocol.indexOf('http')==0)navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script></body></html>
